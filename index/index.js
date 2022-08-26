@@ -1,7 +1,8 @@
 $(document).ready(function(){
-    $(document).scroll(function () {
+    $('main').scroll(function () {
         var y = $(this).scrollTop();
-        if (y > 113) {
+        console.log(y);
+        if (y > 1) {
             $('.arrow').fadeIn(200);
         } else {
             $('.arrow').fadeOut(200);
@@ -10,5 +11,5 @@ $(document).ready(function(){
 
     $('.arrow').click(function () {
         $("html, body").animate({scrollTop: 0}, 300);
-    })
+    });
 });

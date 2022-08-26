@@ -21,17 +21,20 @@ body {
     --il-secondary: #72757e;
     --il-tertiary: #2cb67d;
 
+    --sec-bg: #242629;
+
     --speed: 150ms;
 }
 
 .navbar {
-    position: relative;
+    position: absolute;
     width: 100%;
-    height: 5rem;
+    height: 8%;
     color: var(--el-head);
 }
 .navbar-list {
     padding: 0;
+    margin: 0;
     width: 100%;
     height: 100%;
     list-style: none;
@@ -39,9 +42,8 @@ body {
 .navbar-element {
     position: relative;
     float: right;
-    width: 10rem;
-    height: 70%;
-    text-align: center;
+    width: 8%;
+    height: 100%;
 }
 .navbar-element a {
     position: absolute;
@@ -59,7 +61,7 @@ body {
 }
 .title {
     width: 50%;
-    height: 70%;
+    height: 100%;
     font-size: .8em;
 }
 .title-txt {
@@ -79,14 +81,14 @@ body {
     color: var(--el-head);
     font-size: 1.6rem;
     font-weight: 700;
-    transition: ease var(--speed);
+    transition: ease-in var(--speed);
 }
 .title-img {
     position: relative;
     float: left;
-    width: 3.5rem;
-    height: 3.5rem;
-    margin: 0 1rem;
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
 }
 .title-img img {
     position: absolute;
@@ -96,14 +98,13 @@ body {
     border-radius: 50%;
 }
 .arrow {
-    position: sticky;
+    position: absolute;
     display: none;
     float: right;
     width: 5rem;
     height: 5rem;
-    background-color: var(--el-btn);
     border-radius: 50%;
-    top: 2rem;
+    top: 10%;
     right: 2rem;
     cursor: pointer;
 }
@@ -111,9 +112,24 @@ body {
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
+    filter: invert(48%) sepia(80%) saturate(5096%) hue-rotate(237deg) brightness(97%) contrast(94%);
 }
 
 main {
     width: 100%;
-    height: 200%;
+    height: 100%;
+    overflow-y: scroll;
+    list-style: none;
+    scroll-snap-type: y mandatory;
+}
+.box {
+    list-style: none;
+    text-decoration: none;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+}
+#two {
+    background-color: var(--sec-bg);
 }
