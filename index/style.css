@@ -5,32 +5,40 @@ body {
     font-family: proxima-nova, sans-serif;
     font-size: 18px;
     font-weight: 400;
-    background-color: var(--el-bg);
 }
 
 :root {
-    --el-bg: #16161a;
-    --el-head: #fffffe;
-    --el-para: #94a1b2;
-    --el-btn: #7f5af0;
-    --el-btn-txt: #fffffe;
+    --element-background: #16161a;
+    --element-heading: #fffffe;
+    --element-paragraph: #94a1b2;
 
-    --il-stroke: #010101;
-    --il-main: #fffffe;
-    --il-highlight: #7f5af0;
-    --il-secondary: #72757e;
-    --il-tertiary: #2cb67d;
+    --element-button: #7f5af0;
+    --element-button-texte: #fffffe;
 
-    --sec-bg: #242629;
+    --illustration-stroke: #010101;
+    --illustration-main: #fffffe;
+    --illustration-highlight: #7f5af0;
+    --illustration-secondary: #72757e;
+    --illustration-tertiary: #2cb67d;
+
+    --card-background: #242629;
+    --card-heading: #fffffe;
+    --card-paragraph: #94a1b2;
 
     --speed: 150ms;
+}
+
+.shift {
+    --element-background: #242629;
+    --card-background: #16161a;
 }
 
 .navbar {
     position: absolute;
     width: 100%;
     height: 8%;
-    color: var(--el-head);
+    color: var(--element-heading);
+    z-index: 9;
 }
 .navbar-list {
     padding: 0;
@@ -51,13 +59,13 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-decoration: none;
-    color: var(--el-head);
+    color: var(--element-heading);
     font-size: 1.2rem;
     font-weight: 700;
     transition: ease var(--speed);
 }
 .navbar-element a:hover {
-    color: var(--el-btn);
+    color: var(--element-button);
 }
 .title {
     width: 50%;
@@ -78,7 +86,7 @@ body {
     transform: translate(-50%, -50%);
     width: 100%;
     text-decoration: none;
-    color: var(--el-head);
+    color: var(--element-heading);
     font-size: 1.6rem;
     font-weight: 700;
     transition: ease-in var(--speed);
@@ -107,6 +115,7 @@ body {
     top: 10%;
     right: 2rem;
     cursor: pointer;
+    z-index: 10;
 }
 .arrow img {
     width: 100%;
@@ -123,13 +132,50 @@ main {
     scroll-snap-type: y mandatory;
 }
 .box {
+    position: relative;
     list-style: none;
     text-decoration: none;
     flex-flow: column;
     width: 100%;
     height: 100%;
     scroll-snap-align: start;
+    background-color: var(--element-background);
 }
-#two {
-    background-color: var(--sec-bg);
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(50%, -50%);
+    width: 30%;
+    height: 70%;
+    background-color: var(--card-background);
+    border-radius: 20px;
+}
+.content-left {
+    transform: translate(-150%, -50%);
+}
+.wrap-1 {
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    top: 50%;
+    left: 5%; 
+    transform: translateY(-50%);
+}
+.content-btn {
+    position: absolute;
+    width: 50%;
+    height: 20%;
+    background-color: var(--illustration-highlight);
+    border-radius: 20px;
+}
+.content-paragraph {
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 0;
+    background-color: var(--card-background);
+    border-radius: 20px;
 }
