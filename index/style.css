@@ -12,12 +12,12 @@ body {
     --element-heading: #fffffe;
     --element-paragraph: #94a1b2;
 
-    --element-button: #7f5af0;
+    --element-button: #6547bf;
     --element-button-texte: #fffffe;
 
     --illustration-stroke: #010101;
     --illustration-main: #fffffe;
-    --illustration-highlight: #7f5af0;
+    --illustration-highlight: #6547bf;
     --illustration-secondary: #72757e;
     --illustration-tertiary: #2cb67d;
 
@@ -112,7 +112,7 @@ body {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    top: 10%;
+    top: 7%;
     right: 2rem;
     cursor: pointer;
     z-index: 10;
@@ -121,7 +121,7 @@ body {
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
-    filter: invert(48%) sepia(80%) saturate(5096%) hue-rotate(237deg) brightness(97%) contrast(94%);
+    filter: invert(30%) sepia(63%) saturate(1920%) hue-rotate(237deg) brightness(81%) contrast(85%);
 }
 
 main {
@@ -154,14 +154,6 @@ main {
 .content-left {
     transform: translate(-150%, -50%);
 }
-.wrap-1 {
-    position: absolute;
-    width: 50%;
-    height: 70%;
-    top: 50%;
-    left: 5%; 
-    transform: translateY(-50%);
-}
 .content-btn {
     position: absolute;
     width: 50%;
@@ -178,4 +170,86 @@ main {
     bottom: 0;
     background-color: var(--card-background);
     border-radius: 20px;
+}
+.content-small-height{
+    top: 0;
+    bottom: auto;
+    height: 30%;
+}
+.content-highlight {
+    background-color: var(--illustration-secondary);
+}
+
+.wrap-1 {
+    position: absolute;
+    width: 55%;
+    height: 70%;
+    top: 50%;
+    left: 5%; 
+    transform: translateY(-50%);
+}
+.wrap-1 .content-paragraph {
+    height: 70%;
+}
+.wrap-2 {
+    position: absolute;
+    width: 55%;
+    height: 70%;
+    top: 50%;
+    right: 5%; 
+    transform: translateY(-50%);
+}
+.wrap-3 {
+    position: absolute;
+    width: 55%;
+    height: 70%;
+    top: 50%;
+    left: 5%; 
+    transform: translateY(-50%);
+}
+
+.small-wrap-1 {
+    background-color: var(--element-background);
+    width: 100%;
+}
+.small-wrap-1 .content-paragraph {
+    transform: translateX(0%);
+    left: auto;
+    right: 0;
+    width: 45%;
+    height: 100%;
+}
+.small-wrap-1 .content-btn {
+    transform: translateX(0%);
+    left: 0;
+    height: 100%;
+}
+
+.small-wrap-2 {
+    background-color: var(--element-background);
+}
+.small-wrap-2 .content-paragraph {
+    transform: translateX(0%);
+    left: 0;
+    width: 75%;
+    height: 100%;
+}
+.small-wrap-2 .content-btn {
+    right: 0;
+    width: 20%;
+    height: 100%;
+}
+
+.small-wrap-3 {
+    background-color: var(--element-background);
+}
+.small-wrap-3 .content-paragraph {
+    height: 100%;
+    width: 45%;
+    transform: translateX(0%);
+    left: 0;
+}
+.small-wrap-3 .content-small-right {
+    right: 0;
+    left: auto;
 }
