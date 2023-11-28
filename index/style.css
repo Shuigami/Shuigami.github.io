@@ -9,20 +9,20 @@ body {
 
 :root {
     --element-background: #16161a;
-    --element-heading: #fffffe;
+    --element-heading: #ffffff;
     --element-paragraph: #94a1b2;
 
     --element-button: #6547bf;
-    --element-button-texte: #fffffe;
+    --element-button-texte: #ffffff;
 
     --illustration-stroke: #010101;
-    --illustration-main: #fffffe;
+    --illustration-main: #ffffff;
     --illustration-highlight: #6547bf;
     --illustration-secondary: #72757e;
     --illustration-tertiary: #2cb67d;
 
     --card-background: #242629;
-    --card-heading: #fffffe;
+    --card-heading: #ffffff;
     --card-paragraph: #94a1b2;
 
     --speed: 150ms;
