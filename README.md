@@ -1,133 +1,166 @@
-# Portfolio - EPITA Student
+# 🌟 Ewan Schwaller's Portfolio Website
 
-A modern, responsive portfolio website for an EPITA 4th year student, built with React and deployed on GitHub Pages.
+[![Deploy Status](https://img.shields.io/badge/Deploy-GitHub%20Pages-success?style=flat-square&logo=github)](https://shuigami.github.io/)
+[![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-## 🚀 Features
+> 🚀 A modern, responsive portfolio website built with React showcasing my journey as a Software Engineering student at EPITA
 
-- **Modern Design**: Clean, professional layout with smooth animations
-- **Responsive**: Works perfectly on desktop, tablet, and mobile devices
-- **Interactive Navigation**: Smooth scrolling between sections
-- **Skills Showcase**: Animated skill bars and technology categories
-- **Project Gallery**: Showcase your best work with descriptions and tech stacks
-- **Experience Timeline**: Professional experience with detailed descriptions
-- **Contact Form**: Ready-to-use contact form for potential employers
-- **Performance Optimized**: Fast loading and smooth interactions
+## 🎯 Overview
 
-## 📋 Sections
+Welcome to my personal portfolio website! This project represents my skills, projects, and experiences as a passionate software engineering student. The website features a clean, modern design with smooth animations and mobile responsiveness.
 
-1. **Hero Section**: Your introduction with call-to-action buttons
-2. **About Me**: Personal statement and key highlights
-3. **Technical Skills**: Programming languages, frameworks, and tools
-4. **Featured Projects**: Your best work with live demos and GitHub links
-5. **Work Experience**: Internships and professional experience
-6. **Education**: EPITA education details
-7. **Contact**: Multiple ways to get in touch
+**🌐 Live Demo:** [shuigami.github.io](https://shuigami.github.io/)
 
-## 🛠️ Technologies Used
+## ✨ Features
 
-- React 19.1.0
-- CSS3 with modern features (Grid, Flexbox, Custom Properties)
-- Responsive design principles
-- GitHub Pages for deployment
+- 🎨 **Modern Design** - Clean, professional UI with smooth animations
+- 📱 **Fully Responsive** - Optimized for all devices and screen sizes
+- 🌊 **Smooth Scrolling** - Seamless navigation between sections
+- 🎯 **Interactive Elements** - Hover effects and dynamic content
+- 🚀 **Fast Performance** - Optimized build with React
+- 📊 **Skills Visualization** - Animated skill bars and progress indicators
+- 💼 **Project Showcase** - Detailed project cards with live demos
+- 📝 **Experience Timeline** - Professional experience in chronological order
+- 📧 **Contact Form** - Easy way to get in touch
 
-## 📝 Customization Guide
+## 🛠️ Tech Stack
 
-### 1. Personal Information
-Edit the following in `src/App.js`:
-- Replace "Your Name" with your actual name
-- Update your photo (replace profile placeholder)
-- Modify your specialization and description
+- **Frontend:** React 19.1.0 ⚛️
+- **Styling:** CSS3 with modern features 🎨
+- **Testing:** Jest & React Testing Library 🧪
+- **Deployment:** GitHub Pages 🚀
+- **Build Tool:** React Scripts 📦
 
-### 2. About Section
-- Update the about text with your personal story
-- Modify the highlights (years, projects, internships)
+## 🎪 Sections
 
-### 3. Skills Section
-- Add/remove programming languages and their proficiency levels
-- Update frameworks and tools based on your experience
-- Adjust skill percentages to reflect your abilities
+1. **🏠 Hero** - Welcome section with call-to-action
+2. **👨‍💻 About** - Personal introduction and highlights
+3. **⚡ Skills** - Technical skills with proficiency levels
+4. **🚀 Projects** - Showcase of my best work
+5. **💼 Experience** - Professional and academic experience
+6. **🎓 Education** - Academic background
+7. **📞 Contact** - Ways to reach out
 
-### 4. Projects Section
-- Replace placeholder projects with your actual work
-- Add GitHub links and live demo URLs
-- Update project descriptions and technologies used
+## 🚀 Getting Started
 
-### 5. Experience Section
-- Add your internship and work experience
-- Include detailed descriptions of your responsibilities
-- Update company names and duration
+### Prerequisites
 
-### 6. Education Section
-- Update your EPITA specialization
-- Add your GPA and relevant coursework
-- Include any honors or achievements
+- Node.js (v16 or higher) 📋
+- npm or yarn package manager 📦
 
-### 7. Contact Information
-- Update email, LinkedIn, and GitHub URLs
-- Modify location if needed
-- Customize the contact form action
+### Installation
 
-## 🎨 Color Scheme
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Shuigami/Shuigami.github.io.git
+   cd Shuigami.github.io
+   ```
 
-The portfolio uses a modern dark theme with blue accents:
-- Primary: #3b82f6 (Blue)
-- Secondary: #1e40af (Dark Blue)
-- Background: #0f172a (Dark Navy)
-- Cards: #334155 (Slate)
-- Text: #f8fafc (Light Gray)
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-You can customize colors by editing the CSS variables in `src/App.css`.
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3000` 🌐
+
+## 📜 Available Scripts
+
+- `npm start` 🏃‍♂️ - Runs the app in development mode
+- `npm test` 🧪 - Launches the test runner
+- `npm run build` 🏗️ - Builds the app for production
+- `npm run deploy` 🚀 - Deploys to GitHub Pages
+
+## 🎨 Customization
+
+### Updating Personal Information
+
+1. **Personal Details:** Edit the content in `src/App.js`
+2. **Profile Image:** Replace `public/me.jpg` with your photo
+3. **CV/Resume:** Replace `public/cv.pdf` with your resume
+4. **Project Images:** Add your project screenshots to `public/`
+
+### Styling
+
+- **Colors:** Modify CSS variables in `src/App.css`
+- **Fonts:** Update font imports in `src/index.css`
+- **Layout:** Adjust component styles in `src/App.css`
+
+## 📁 Project Structure
+
+```
+src/
+├── App.js          # Main component with all sections
+├── App.css         # Styling for all components
+├── App.test.js     # Component tests
+├── index.js        # React entry point
+├── index.css       # Global styles
+└── ...
+
+public/
+├── index.html      # HTML template
+├── me.jpg          # Profile image
+├── cv.pdf          # Resume/CV
+├── *.png           # Project images
+└── ...
+```
 
 ## 🚀 Deployment
 
-This portfolio is set up for GitHub Pages deployment:
+This portfolio is automatically deployed to GitHub Pages using the `gh-pages` package.
 
-1. Make sure your repository is named `yourusername.github.io`
-2. Update the homepage URL in `package.json`
-3. Run the deployment command:
-   ```bash
-   npm run deploy
-   ```
+### Manual Deployment
 
-## 📱 Responsive Design
-
-The portfolio is fully responsive and optimized for:
-- Desktop (1200px+)
-- Tablet (768px - 1199px)
-- Mobile (< 768px)
-
-## 🔧 Development
-
-To run locally:
 ```bash
-npm install
-npm start
+npm run deploy
 ```
 
-To build for production:
-```bash
-npm run build
-```
+### Automatic Deployment
 
-## 📈 Performance
+Push changes to the `main` branch, and GitHub Actions will handle the deployment.
 
-- Optimized images and assets
-- Efficient CSS with modern techniques
-- Minimal JavaScript for smooth interactions
-- Fast loading times
+## 🎯 Performance
 
-## 🎯 Tips for EPITA Students
+- ⚡ **Fast Loading** - Optimized React build
+- 🎨 **Smooth Animations** - CSS transitions and transforms
+- 📱 **Mobile First** - Responsive design principles
+- 🔧 **SEO Friendly** - Meta tags and semantic HTML
 
-1. **Highlight Your Specialization**: Make sure to emphasize your chosen track (SRS, SCIA, etc.)
-2. **Show Technical Depth**: Include system-level projects and algorithms work
-3. **Industry Experience**: Highlight internships and real-world applications
-4. **Academic Projects**: Include significant school projects that demonstrate your skills
-5. **Professional Presentation**: Use this for internship applications and job searches
+## 🤝 Contributing
+
+Feel free to contribute to this project! Here's how:
+
+1. Fork the repository 🍴
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request 🎉
+
+## 📧 Contact
+
+**Ewan Schwaller**
+- 🌐 Website: [shuigami.github.io](https://shuigami.github.io/)
+- 📧 Email: [Contact form on website](https://shuigami.github.io/#contact)
+- 🎓 Student at EPITA
 
 ## 📄 License
 
-This portfolio template is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- React team for the amazing framework ⚛️
+- GitHub Pages for free hosting 🏠
+- Open source community for inspiration 💡
 
 ---
 
-**Created for EPITA students by a fellow developer. Make it yours and showcase your amazing work!**
+⭐ **If you like this project, please give it a star!** ⭐
+
+*Made with ❤️ by Ewan Schwaller*
