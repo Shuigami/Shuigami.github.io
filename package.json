@@ -1,7 +1,7 @@
 {
   "name": "shui-portfolio",
   "version": "0.1.0",
-  "homepage": "https://shuigami.github.io",
+  "homepage": "https://shuigami.github.io/",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
