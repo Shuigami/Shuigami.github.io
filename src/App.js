@@ -319,8 +319,20 @@ function Experience() {
   const experiences = [
     {
       company: "ADP - Groupe ADP",
+      position: "Web Development Intern",
+      duration: "September 2024 - January 2025",
+      description: [
+        "Developed a monitoring web application for the Extime marketplace using Blazor (frontend) and ASP.NET Core (backend).",
+        "Enabled real-time visualization of order workflows to support operational teams in identifying and resolving issues efficiently.",
+        "Participated in an agile environment with daily stand-ups and iterative sprints.",
+        "Strengthened skills in C#, API development, Entity Framework, and data visualization with ApexCharts.",
+        "Contributed to ADP’s broader digital transformation by delivering a scalable and modular internal tool."
+      ],
+    },
+    {
+      company: "ADP - Groupe ADP",
       position: "Data Analytics Intern",
-      duration: "2023 (2 months)",
+      duration: "May - July 2023",
       description: [
         "Worked within the Data pole of the Digital department in the Information Systems Department",
         "Created an innovative marketing brochure for data visualization solutions",
@@ -332,7 +344,7 @@ function Experience() {
     {
       company: "ADP - Groupe ADP",
       position: "IT Department Discovery Intern",
-      duration: "2022 (4 weeks)",
+      duration: "June 2022",
       description: [
         "Internship in the Digital department of the Information Systems Department",
         "Discovered entities and professions within the IT department",
