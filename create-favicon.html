@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid #61dafb;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        button {
+            background: #61dafb;
+            color: #0a0a0a;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #4fa8c5;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(97, 218, 251, 0.1);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Favicon Generator for Ewan Schwaller</h1>
+        <p>Generate custom favicons with your initials</p>
+        
+        <canvas id="favicon32" width="32" height="32"></canvas>
+        <canvas id="favicon192" width="192" height="192"></canvas>
+        <canvas id="favicon512" width="512" height="512"></canvas>
+        
+        <div>
+            <button onclick="generateFavicons()">Generate Favicons</button>
+            <button onclick="downloadFavicon(32)">Download 32x32</button>
+            <button onclick="downloadFavicon(192)">Download 192x192</button>
+            <button onclick="downloadFavicon(512)">Download 512x512</button>
+        </div>
+        
+        <div class="info">
+            <h3>📋 Instructions:</h3>
+            <p>1. Click "Generate Favicons" to create icons</p>
+            <p>2. Download all three sizes</p>
+            <p>3. Replace the files in your public folder:</p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>32x32 → favicon.ico</li>
+                <li>192x192 → logo192.png</li>
+                <li>512x512 → logo512.png</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function generateFavicons() {
+            generateFavicon(32);
+            generateFavicon(192);
+            generateFavicon(512);
+        }
+        
+        function generateFavicon(size) {
+            const canvas = document.getElementById(`favicon${size}`);
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#61dafb');
+            gradient.addColorStop(1, '#4fa8c5');
+            
+            // Draw background circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Add inner shadow effect
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = size * 0.1;
+            ctx.shadowOffsetX = size * 0.05;
+            ctx.shadowOffsetY = size * 0.05;
+            
+            // Draw text "ES"
+            ctx.fillStyle = '#0a0a0a';
+            ctx.font = `bold ${size * 0.4}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'transparent';
+            ctx.fillText('ES', size/2, size/2);
+            
+            // Add highlight
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, Math.PI, true);
+            ctx.fill();
+        }
+        
+        function downloadFavicon(size) {
+            const canvas = document.getElementById(`favicon${size}`);
+            const link = document.createElement('a');
+            
+            if (size === 32) {
+                // For favicon.ico, we'll download as PNG and you can convert it
+                link.download = 'favicon-32x32.png';
+            } else {
+                link.download = `logo${size}.png`;
+            }
+            
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate favicons on page load
+        window.onload = generateFavicons;
+    </script>
+</body>
+</html>
