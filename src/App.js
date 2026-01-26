@@ -101,7 +101,7 @@ function Hero() {
           <h1>Ewan Schwaller</h1>
           <h2>Software Engineering Student at EPITA</h2>
           <p className="hero-description">
-            Passionate 4th year student specializing in Image Processing and
+            Passionate 5th year student specializing in Image Processing and
             Artificial Intelligence.
           </p>
           <div className="hero-buttons">
@@ -142,7 +142,7 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p>
-              I am a dedicated 4th year Software Engineering student at EPITA,
+              I am a dedicated 5th year Software Engineering student at EPITA,
               specializing in Image Processing and Artificial Intelligence. My
               academic path has combined rigorous theoretical foundations with
               hands-on experience in computer vision, machine learning, and
@@ -159,7 +159,7 @@ function About() {
             </p>
             <div className="about-highlights">
               <div className="highlight">
-                <span className="highlight-number">4</span>
+                <span className="highlight-number">5</span>
                 <span className="highlight-text">Years at EPITA</span>
               </div>
               <div className="highlight">
