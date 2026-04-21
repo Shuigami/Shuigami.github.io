@@ -1,5 +1,24 @@
 import "./App.css";
 import { useState } from "react";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Radar } from "react-chartjs-2";
+
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+);
 
 function App() {
   const [activeSection, setActiveSection] = useState("about");
@@ -14,6 +33,12 @@ function App() {
 
   return (
     <div className="App">
+      <div className="cosmic-layer">
+        <div className="grid-floor" />
+        <div className="aurora aurora-a" />
+        <div className="aurora aurora-b" />
+        <div className="noise-overlay" />
+      </div>
       <Navigation
         activeSection={activeSection}
         onSectionClick={scrollToSection}
@@ -98,6 +123,7 @@ function Hero() {
     <section className="hero">
       <div className="hero-content">
         <div className="hero-text">
+          <p className="hero-kicker">Neural visuals powered by code</p>
           <h1>Ewan Schwaller</h1>
           <h2>Software Engineering Student at EPITA</h2>
           <p className="hero-description">
@@ -125,8 +151,12 @@ function Hero() {
           </div>
         </div>
         <div className="hero-image">
-          <div className="profile-placeholder">
-            <img src="me.jpg" alt="Ewan Schwaller" />
+          <div className="profile-scene">
+            <div className="profile-ring ring-a" />
+            <div className="profile-ring ring-b" />
+            <div className="profile-placeholder">
+              <img src="me.jpg" alt="Ewan Schwaller" />
+            </div>
           </div>
         </div>
       </div>
@@ -167,7 +197,7 @@ function About() {
                 <span className="highlight-text">Projects Completed</span>
               </div>
               <div className="highlight">
-                <span className="highlight-number">3</span>
+                <span className="highlight-number">4</span>
                 <span className="highlight-text">Internships</span>
               </div>
             </div>
@@ -190,6 +220,8 @@ function Skills() {
         { name: "JavaScript", level: 75 },
         { name: "SQL", level: 70 },
       ],
+      color: "rgba(59, 130, 246, 0.5)",
+      borderColor: "rgba(59, 130, 246, 1)",
     },
     {
       title: "AI & Computer Vision",
@@ -199,8 +231,10 @@ function Skills() {
         { name: "scikit-learn", level: 80 },
         { name: "TensorFlow", level: 75 },
         { name: "PyTorch", level: 70 },
-        { name: "Deep Learning for Vision", level: 70 },
+        { name: "Deep Learning", level: 70 },
       ],
+      color: "rgba(139, 92, 246, 0.5)",
+      borderColor: "rgba(139, 92, 246, 1)",
     },
     {
       title: "Development & Tools",
@@ -212,35 +246,83 @@ function Skills() {
         { name: "React.js", level: 70 },
         { name: "Blender", level: 65 },
       ],
+      color: "rgba(245, 158, 11, 0.5)",
+      borderColor: "rgba(245, 158, 11, 1)",
     },
   ];
+
+  const chartOptions = {
+    scales: {
+      r: {
+        angleLines: {
+          color: "rgba(255, 255, 255, 0.1)",
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)",
+        },
+        pointLabels: {
+          color: "#cbd5e1",
+          font: {
+            size: 13,
+            family: "'Inter', sans-serif",
+            weight: "500",
+          },
+        },
+        ticks: {
+          display: false,
+          stepSize: 20,
+        },
+        suggestedMin: 0,
+        suggestedMax: 100,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: "rgba(15, 23, 42, 0.9)",
+        titleFont: { size: 14 },
+        bodyFont: { size: 14 },
+        displayColors: false,
+      },
+    },
+    maintainAspectRatio: false,
+    responsive: true,
+  };
 
   return (
     <section id="skills" className="section">
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
         <div className="skills-grid">
-          {skillCategories.map((category, index) => (
-            <div key={index} className="skill-category">
-              <h3>{category.title}</h3>
-              <div className="skills-list">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="skill-item">
-                    <div className="skill-info">
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="skill-percentage">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar">
-                      <div
-                        className="skill-fill"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
+          {skillCategories.map((category, index) => {
+            const data = {
+              labels: category.skills.map((s) => s.name),
+              datasets: [
+                {
+                  label: "Level",
+                  data: category.skills.map((s) => s.level),
+                  backgroundColor: category.color,
+                  borderColor: category.borderColor,
+                  borderWidth: 2,
+                  pointBackgroundColor: category.borderColor,
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: category.borderColor,
+                },
+              ],
+            };
+
+            return (
+              <div key={index} className="skill-category">
+                <h3>{category.title}</h3>
+                <div className="skill-chart-container">
+                  <Radar data={data} options={chartOptions} />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
