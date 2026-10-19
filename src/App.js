@@ -32,9 +32,9 @@ function App() {
       <Navigation />
       <main id="main">
         <Hero />
-        <Projects />
         <About />
         <Skills />
+        <Projects />
         <Experience />
         <Education />
         <Contact />
@@ -78,9 +78,9 @@ function Navigation() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { id: "projects", label: "Projects" },
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
+    { id: "projects", label: "Projects" },
     { id: "experience", label: "Experience" },
     { id: "education", label: "Education" },
     { id: "contact", label: "Contact" },
@@ -151,7 +151,7 @@ function Hero() {
           </div>
         </div>
       </div>
-      <div className="hero-footer container"><span>Portfolio / {new Date().getFullYear()}</span><a href="#projects">Scroll to explore <ArrowIcon className="arrow-down" /></a><span>Paris, France</span></div>
+      <div className="hero-footer container"><span>Portfolio / {new Date().getFullYear()}</span><a href="#about">Scroll to explore <ArrowIcon className="arrow-down" /></a><span>Paris, France</span></div>
     </section>
   );
 }
@@ -164,7 +164,7 @@ function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <SectionHeading number="02" label="Behind the code">Curiosity as a compass.</SectionHeading>
+        <SectionHeading number="01" label="About me">Curiosity as a compass.</SectionHeading>
         <div className="about-content">
           <figure className="about-portrait">
             <img src="me.jpg" alt="Ewan Schwaller" loading="lazy" width="420" height="500" />
@@ -294,7 +294,7 @@ function Skills() {
   return (
     <section id="skills" className="section">
       <div className="container">
-        <SectionHeading number="03" label="Tools & expertise">A toolkit for new frontiers.</SectionHeading>
+        <SectionHeading number="02" label="Skills & expertise">A toolkit for new frontiers.</SectionHeading>
         <div className="skills-grid">
           {skillCategories.map((category, index) => {
             const data = {
@@ -364,7 +364,7 @@ function Projects() {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <SectionHeading number="01" label="My projects">Projects I've built.</SectionHeading>
+        <SectionHeading number="03" label="My projects">Projects I've built.</SectionHeading>
         <p className="projects-intro">A selection of my work in computer graphics and computer vision — designed, coded, and built from scratch.</p>
         <div className="projects-grid">
           {projects.map((project, index) => (
