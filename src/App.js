@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -20,99 +20,117 @@ ChartJS.register(
   Legend
 );
 
+function ArrowIcon({ className = "" }) {
+  return <svg className={`arrow-icon ${className}`} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg>;
+}
+
 function App() {
-  const [activeSection, setActiveSection] = useState("about");
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(sectionId);
-    }
-  };
-
   return (
     <div className="App">
-      <div className="cosmic-layer">
-        <div className="grid-floor" />
-        <div className="aurora aurora-a" />
-        <div className="aurora aurora-b" />
-        <div className="noise-overlay" />
-      </div>
-      <Navigation
-        activeSection={activeSection}
-        onSectionClick={scrollToSection}
-      />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Education />
-      <Contact />
+      <a className="skip-link" href="#main">Skip to content</a>
+      <Navigation />
+      <main id="main">
+        <Hero />
+        <Projects />
+        <About />
+        <Skills />
+        <Experience />
+        <Education />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
 }
 
-function Navigation({ activeSection, onSectionClick }) {
+function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    }, { rootMargin: "-20% 0px -55% 0px" });
+    document.querySelectorAll("main section[id]").forEach((section) => observer.observe(section));
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        document.getElementById("menu-toggle").focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isMobileMenuOpen]);
 
   const navItems = [
+    { id: "projects", label: "Projects" },
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
     { id: "experience", label: "Experience" },
     { id: "education", label: "Education" },
     { id: "contact", label: "Contact" },
   ];
 
-  const handleSectionClick = (sectionId) => {
-    onSectionClick(sectionId);
-    setIsMobileMenuOpen(false);
-  };
-
   return (
-    <nav className="navigation">
+    <nav className={`navigation${isScrolled ? " is-scrolled" : ""}`} aria-label="Main navigation">
       <div className="nav-container">
-        <div className="nav-brand">
-          <h2>Ewan Schwaller</h2>
-        </div>
+        <a className="nav-brand" href="#home" aria-label="Ewan Schwaller — home" onClick={() => setIsMobileMenuOpen(false)}>ES<span aria-hidden="true">.</span></a>
 
         <div className="nav-links">
           {navItems.map((item) => (
-            <button
+            <a
               key={item.id}
+              href={`#${item.id}`}
               className={`nav-link ${
                 activeSection === item.id ? "active" : ""
               }`}
-              onClick={() => handleSectionClick(item.id)}
+              aria-current={activeSection === item.id ? "location" : undefined}
             >
               {item.label}
-            </button>
+            </a>
           ))}
         </div>
 
         <button
+          id="menu-toggle"
           className="nav-mobile-toggle"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          ☰
+          {isMobileMenuOpen ? "Close −" : "Menu +"}
         </button>
 
-        <div className={`nav-mobile-menu ${isMobileMenuOpen ? "active" : ""}`}>
+        {isMobileMenuOpen && <div id="mobile-navigation" className="nav-mobile-menu" role="group" aria-label="Mobile navigation">
           {navItems.map((item) => (
-            <button
+            <a
               key={item.id}
+              href={`#${item.id}`}
               className={`nav-link ${
                 activeSection === item.id ? "active" : ""
               }`}
-              onClick={() => handleSectionClick(item.id)}
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-current={activeSection === item.id ? "location" : undefined}
             >
               {item.label}
-            </button>
+            </a>
           ))}
-        </div>
+        </div>}
       </div>
     </nav>
   );
@@ -120,56 +138,37 @@ function Navigation({ activeSection, onSectionClick }) {
 
 function Hero() {
   return (
-    <section className="hero">
+    <section id="home" className="hero" aria-labelledby="hero-title">
       <div className="hero-content">
         <div className="hero-text">
-          <p className="hero-kicker">Neural visuals powered by code</p>
-          <h1>Ewan Schwaller</h1>
-          <h2>Software Engineering Student at EPITA</h2>
-          <p className="hero-description">
-            Passionate 5th year student specializing in Image Processing and
-            Artificial Intelligence.
-          </p>
+          <p className="hero-kicker">Software engineer · AI & computer vision</p>
+          <h1 id="hero-title"><span>Ewan</span>{" "}<span>Schwaller</span></h1>
+          <p className="hero-description">Building intelligent systems.<br className="mobile-break" /> Exploring new horizons.</p>
           <div className="hero-buttons">
-            <button
-              className="btn-primary"
-              onClick={() =>
-                window.scrollTo({
-                  top: document.getElementById("projects").offsetTop,
-                  behavior: "smooth",
-                })
-              }
-            >
-              View Projects
-            </button>
-            <button
-              className="btn-secondary"
-              onClick={() => window.open("cv.pdf", "_blank")}
-            >
-              Download CV
-            </button>
-          </div>
-        </div>
-        <div className="hero-image">
-          <div className="profile-scene">
-            <div className="profile-ring ring-a" />
-            <div className="profile-ring ring-b" />
-            <div className="profile-placeholder">
-              <img src="me.jpg" alt="Ewan Schwaller" />
-            </div>
+            <a className="btn-primary" href="#projects">Explore projects <ArrowIcon /></a>
+            <a className="btn-secondary" href="cv.pdf" target="_blank" rel="noopener noreferrer">Download CV <span className="sr-only">(PDF, opens in a new tab)</span></a>
           </div>
         </div>
       </div>
+      <div className="hero-footer container"><span>Portfolio / {new Date().getFullYear()}</span><a href="#projects">Scroll to explore <ArrowIcon className="arrow-down" /></a><span>Paris, France</span></div>
     </section>
   );
+}
+
+function SectionHeading({ number, label, children }) {
+  return <div className="section-heading"><p className="section-eyebrow"><span>{number} /</span> {label}</p><h2 className="section-title">{children}</h2></div>;
 }
 
 function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <h2 className="section-title">About Me</h2>
+        <SectionHeading number="02" label="Behind the code">Curiosity as a compass.</SectionHeading>
         <div className="about-content">
+          <figure className="about-portrait">
+            <img src="me.jpg" alt="Ewan Schwaller" loading="lazy" width="420" height="500" />
+            <figcaption>Software Engineering Student at EPITA<span>Image processing & artificial intelligence</span></figcaption>
+          </figure>
           <div className="about-text">
             <p>
               I am a dedicated 5th year Software Engineering student at EPITA,
@@ -220,8 +219,8 @@ function Skills() {
         { name: "JavaScript", level: 75 },
         { name: "SQL", level: 70 },
       ],
-      color: "rgba(59, 130, 246, 0.5)",
-      borderColor: "rgba(59, 130, 246, 1)",
+      color: "rgba(235, 151, 55, 0.18)",
+      borderColor: "#eba137",
     },
     {
       title: "AI & Computer Vision",
@@ -233,8 +232,8 @@ function Skills() {
         { name: "PyTorch", level: 70 },
         { name: "Deep Learning", level: 70 },
       ],
-      color: "rgba(139, 92, 246, 0.5)",
-      borderColor: "rgba(139, 92, 246, 1)",
+      color: "rgba(213, 105, 65, 0.18)",
+      borderColor: "#e3946a",
     },
     {
       title: "Development & Tools",
@@ -246,8 +245,8 @@ function Skills() {
         { name: "React.js", level: 70 },
         { name: "Blender", level: 65 },
       ],
-      color: "rgba(245, 158, 11, 0.5)",
-      borderColor: "rgba(245, 158, 11, 1)",
+      color: "rgba(222, 197, 146, 0.18)",
+      borderColor: "#dec592",
     },
   ];
 
@@ -261,10 +260,10 @@ function Skills() {
           color: "rgba(255, 255, 255, 0.1)",
         },
         pointLabels: {
-          color: "#cbd5e1",
+          color: "#d9c9b7",
           font: {
-            size: 13,
-            family: "'Inter', sans-serif",
+            size: 11,
+            family: "Arial, sans-serif",
             weight: "500",
           },
         },
@@ -281,7 +280,7 @@ function Skills() {
         display: false,
       },
       tooltip: {
-        backgroundColor: "rgba(15, 23, 42, 0.9)",
+        backgroundColor: "rgba(38, 22, 15, 0.96)",
         titleFont: { size: 14 },
         bodyFont: { size: 14 },
         displayColors: false,
@@ -294,7 +293,7 @@ function Skills() {
   return (
     <section id="skills" className="section">
       <div className="container">
-        <h2 className="section-title">Technical Skills</h2>
+        <SectionHeading number="03" label="Tools & expertise">A toolkit for new frontiers.</SectionHeading>
         <div className="skills-grid">
           {skillCategories.map((category, index) => {
             const data = {
@@ -318,8 +317,11 @@ function Skills() {
               <div key={index} className="skill-category">
                 <h3>{category.title}</h3>
                 <div className="skill-chart-container">
-                  <Radar data={data} options={chartOptions} />
+                  <Radar data={data} options={chartOptions} role="img" aria-label={`${category.title} proficiency chart`} />
                 </div>
+                <ul className="skill-summary">
+                  {category.skills.map((skill) => <li key={skill.name}><span>{skill.name}</span><span>{skill.level}%</span></li>)}
+                </ul>
               </div>
             );
           })}
@@ -361,14 +363,15 @@ function Projects() {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <h2 className="section-title">Featured Projects</h2>
+        <SectionHeading number="01" label="Selected work">Ideas shaped into reality.</SectionHeading>
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="project-card">
               <div className="project-image">
-                <img src={project.image} alt={project.title} />
+                <img src={project.image} alt={`${project.title} project screenshot`} loading="lazy" />
               </div>
               <div className="project-content">
+                <span className="project-number">0{index + 1}</span>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
                 <div className="project-tech">
@@ -379,8 +382,8 @@ function Projects() {
                   ))}
                 </div>
                 <div className="project-links">
-                  <a href={project.github} className="project-link">
-                    GitHub
+                  <a href={project.github} className="project-link" target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub (opens in a new tab)`}>
+                    View project <ArrowIcon />
                   </a>
                   {project.live && (
                     <a href={project.live} className="project-link">
@@ -451,7 +454,7 @@ function Experience() {
   return (
     <section id="experience" className="section">
       <div className="container">
-        <h2 className="section-title">Work Experience</h2>
+        <SectionHeading number="04" label="Experience">Learning through the journey.</SectionHeading>
         <div className="experience-timeline">
           {experiences.map((exp, index) => (
             <div key={index} className="experience-item">
@@ -477,7 +480,7 @@ function Education() {
   return (
     <section id="education" className="section">
       <div className="container">
-        <h2 className="section-title">Education</h2>
+        <SectionHeading number="05" label="Education">Foundations for what comes next.</SectionHeading>
         <div className="education-content">
           <div className="education-item">
             <div className="education-header">
@@ -496,7 +499,6 @@ function Education() {
                 advanced AI techniques, deep learning, and intelligent systems
                 development
               </p>
-              <p>Relevant Coursework:</p>
             </div>
           </div>
           <div className="education-item">
@@ -593,12 +595,12 @@ function Contact() {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
+        <SectionHeading number="06" label="Contact">Let's explore what's possible.</SectionHeading>
         <div className="contact-content">
           <div className="contact-info">
             <div className="contact-item">
               <h3>Email</h3>
-              <p>ewan.schwaller@epita.fr</p>
+              <p><a href="mailto:ewan.schwaller@epita.fr">ewan.schwaller@epita.fr</a></p>
             </div>
             <div className="contact-item">
               <h3>LinkedIn</h3>
@@ -631,8 +633,12 @@ function Contact() {
           </div>
           <div className="contact-form">
             <h3>Send a Message</h3>
+            <p className="form-note">Have a project in mind? This form prepares a message in your email app.</p>
             <form onSubmit={handleSubmit}>
+              <label htmlFor="contact-name">Your name</label>
               <input 
+                id="contact-name"
+                autoComplete="name"
                 type="text" 
                 name="name"
                 placeholder="Your Name" 
@@ -640,7 +646,10 @@ function Contact() {
                 onChange={handleInputChange}
                 required 
               />
+              <label htmlFor="contact-email">Your email</label>
               <input 
+                id="contact-email"
+                autoComplete="email"
                 type="email" 
                 name="email"
                 placeholder="Your Email" 
@@ -648,7 +657,9 @@ function Contact() {
                 onChange={handleInputChange}
                 required 
               />
+              <label htmlFor="contact-message">Your message</label>
               <textarea 
+                id="contact-message"
                 name="message"
                 placeholder="Your Message" 
                 rows="5" 
@@ -661,13 +672,13 @@ function Contact() {
                 className="btn-primary"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? 'Preparing...' : 'Prepare email'} <ArrowIcon />
               </button>
               {submitStatus === 'success' && (
-                <p className="form-status success">Your default email client should open with the message ready to send!</p>
+                <p role="status" className="form-status success">Your default email client should open with the message ready to send!</p>
               )}
               {submitStatus === 'error' && (
-                <p className="form-status error">There was an error. Please try emailing directly at ewan.schwaller@epita.fr</p>
+                <p role="alert" className="form-status error">There was an error. Please try emailing directly at ewan.schwaller@epita.fr</p>
               )}
             </form>
           </div>
@@ -681,8 +692,9 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2025 Ewan Schwaller. All rights reserved.</p>
-        <p>Built with React • Hosted on GitHub Pages</p>
+        <a href="#home" className="footer-brand" aria-label="Back to top">ES.</a>
+        <p>&copy; {new Date().getFullYear()} Ewan Schwaller</p>
+        <a href="#home">Back to the horizon <ArrowIcon className="arrow-up" /></a>
       </div>
     </footer>
   );
