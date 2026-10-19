@@ -3,6 +3,7 @@ import App from './App';
 
 // Charts are exercised in Chromium; jsdom does not implement Canvas.
 jest.mock('react-chartjs-2', () => ({ Radar: () => <div data-testid="radar-chart" /> }));
+jest.mock('./GitHubProjects', () => () => <div>GitHub project browser</div>);
 
 beforeAll(() => {
   window.IntersectionObserver = class {

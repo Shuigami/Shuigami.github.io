@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
+import GitHubProjects from "./GitHubProjects";
 
 ChartJS.register(
   RadialLinearScale,
@@ -363,7 +364,8 @@ function Projects() {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <SectionHeading number="01" label="Selected work">Ideas shaped into reality.</SectionHeading>
+        <SectionHeading number="01" label="My projects">Projects I've built.</SectionHeading>
+        <p className="projects-intro">A selection of my work in computer graphics and computer vision — designed, coded, and built from scratch.</p>
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="project-card">
@@ -395,6 +397,7 @@ function Projects() {
             </div>
           ))}
         </div>
+        <GitHubProjects />
       </div>
     </section>
   );
