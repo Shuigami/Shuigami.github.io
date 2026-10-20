@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-const REVEAL_SELECTOR = ".section-heading, .about-content, .skill-category, .project-card, .experience-item, .education-item, .contact-content";
+const REVEAL_SELECTOR = ".section-heading, .about-content, .skill-category, .project-card, .journey, .contact-content";
 
 export default function usePortfolioEffects() {
   const appRef = useRef(null);

@@ -10,7 +10,13 @@ import {
   Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
-import GitHubProjects from "./GitHubProjects";
+import FeaturedProjects from "./FeaturedProjects";
+import { PROJECTS, PROJECT_SKILLS } from "./projectData";
+import { ArrowIcon } from "./Icons";
+import Journey from "./Journey";
+import { EXPERIENCE_STOPS, EDUCATION_STOPS } from "./journeyData";
+import ReadingProgress from "./ReadingProgress";
+import CopyEmail from "./CopyEmail";
 import usePortfolioEffects from "./usePortfolioEffects";
 
 ChartJS.register(
@@ -22,12 +28,9 @@ ChartJS.register(
   Legend
 );
 
-function ArrowIcon({ className = "" }) {
-  return <svg className={`arrow-icon ${className}`} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg>;
-}
-
 function App() {
   const appRef = usePortfolioEffects();
+  const [selectedSkill, setSelectedSkill] = useState(null);
   return (
     <div className="App" ref={appRef}>
       <a className="skip-link" href="#main">Skip to content</a>
@@ -35,8 +38,8 @@ function App() {
       <main id="main">
         <Hero />
         <About />
-        <Skills />
-        <Projects />
+        <Skills onSelectSkill={setSelectedSkill} />
+        <Projects selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
         <Experience />
         <Education />
         <Contact />
@@ -135,6 +138,7 @@ function Navigation() {
           ))}
         </div>}
       </div>
+      <ReadingProgress />
     </nav>
   );
 }
@@ -159,7 +163,7 @@ function Hero() {
           </div>
         </div>
       </div>
-      <div className="hero-footer container"><span>Portfolio / {new Date().getFullYear()}</span><a href="#about">Scroll to explore <ArrowIcon className="arrow-down" /></a><span>Paris, France</span></div>
+      <div className="hero-footer container"><span>Portfolio / {new Date().getFullYear()}</span><a href="#about">Scroll to explore <ArrowIcon className="arrow-down" /></a><span>Paris, France / 48.86° N · 2.35° E</span></div>
     </section>
   );
 }
@@ -180,20 +184,14 @@ function About() {
           </figure>
           <div className="about-text">
             <p>
-              I am a dedicated 5th year Software Engineering student at EPITA,
-              specializing in Image Processing and Artificial Intelligence. My
-              academic path has combined rigorous theoretical foundations with
-              hands-on experience in computer vision, machine learning, and
-              software development.
+              5th-year software engineering student at EPITA, specializing in
+              image processing, computer vision and artificial intelligence.
+              I explore how code can turn pixels and geometry into something useful.
             </p>
             <p>
-              Through intensive projects and coursework at EPITA, I've developed
-              strong skills in algorithms, system design, and AI-driven
-              solutions. I'm currently preparing to pursue a double degree at
-              UQAC in the Master's program in Computer Science, with a focus on
-              Artificial Intelligence, to further deepen my expertise. I thrive
-              in collaborative, innovation-driven environments and am passionate
-              about turning complex problems into scalable, intelligent systems.
+              My work spans rendering engines, image recognition and web applications.
+              I'm preparing a double degree with UQAC in Computer Science and AI,
+              building on hands-on projects and experience at Groupe ADP.
             </p>
             <div className="about-highlights">
               <div className="highlight">
@@ -216,7 +214,7 @@ function About() {
   );
 }
 
-function Skills() {
+function Skills({ onSelectSkill }) {
   const skillCategories = [
     {
       title: "Programming Languages",
@@ -303,6 +301,7 @@ function Skills() {
     <section id="skills" className="section">
       <div className="container">
         <SectionHeading number="02" label="Skills & expertise">A toolkit for new frontiers.</SectionHeading>
+        <div className="skills-explore"><p>Follow a skill into a project.</p><div>{PROJECT_SKILLS.map((skill) => <a key={skill} href="#projects" onClick={() => onSelectSkill(skill)}>{skill}<ArrowIcon /></a>)}</div></div>
         <div className="skills-grid">
           {skillCategories.map((category, index) => {
             const data = {
@@ -329,7 +328,7 @@ function Skills() {
                   <Radar data={data} options={chartOptions} role="img" aria-label={`${category.title} proficiency chart`} />
                 </div>
                 <ul className="skill-summary">
-                  {category.skills.map((skill) => <li key={skill.name}><span>{skill.name}</span><span>{skill.level}%</span></li>)}
+                  {category.skills.map((skill) => <li key={skill.name}><span>{PROJECTS.some((project) => project.skills.includes(skill.name)) ? <a href="#projects" className="linked-skill" onClick={() => onSelectSkill(skill.name)} aria-label={`See projects using ${skill.name}`}>{skill.name}<ArrowIcon /></a> : skill.name}</span><span>{skill.level}%</span></li>)}
                 </ul>
               </div>
             );
@@ -340,222 +339,32 @@ function Skills() {
   );
 }
 
-function Projects() {
-  const projects = [
-    {
-      title: "Raytracer",
-      description:
-        "A modern C++ raytracer implementation with support for multiple geometric primitives, lighting, and material systems.",
-      technologies: ["C++"],
-      github: "https://github.com/shuigami/raytracer",
-      image: "raytracer.png",
-    },
-    {
-      title: "Sudoku OCR Solver",
-      description:
-        "An advanced computer vision system that automatically detects, extracts, and solves Sudoku puzzles from images using sophisticated image processing techniques, neural network digit recognition, and backtracking algorithms.",
-      technologies: ["C++", "SDL2", "GTK"],
-      github: "https://github.com/shuigami/ocr",
-      live: null,
-      image: "ocr.jpeg",
-    },
-    {
-      title: "Rasterizer",
-      description:
-        "A modern C++ software rasterizer built from scratch with multiple shading techniques and real-time rendering capabilities!",
-      technologies: ["C++", "SDL2"],
-      github: "https://github.com/shuigami/rasterizer",
-      image: "rasterizer.png",
-    },
-  ];
-
+function Projects({ selectedSkill, onSelectSkill }) {
   return (
     <section id="projects" className="section">
       <div className="container">
         <SectionHeading number="03" label="My projects">Projects I've built.</SectionHeading>
-        <p className="projects-intro">A selection of my work in computer graphics and computer vision — designed, coded, and built from scratch.</p>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <div className="project-image">
-                <img src={project.image} alt={`${project.title} project screenshot`} loading="lazy" />
-              </div>
-              <div className="project-content">
-                <span className="project-number">0{index + 1}</span>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-tech">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-tag">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="project-links">
-                  <a href={project.github} className="project-link" target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub (opens in a new tab)`}>
-                    View project <ArrowIcon />
-                  </a>
-                  {project.live && (
-                    <a href={project.live} className="project-link">
-                      Live Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <GitHubProjects />
+        <p className="projects-intro">Selected work in computer graphics and computer vision. Open a case study to explore the ideas, techniques and visuals behind it.</p>
+        <FeaturedProjects selectedSkill={selectedSkill} onSelectSkill={onSelectSkill} />
       </div>
     </section>
   );
 }
 
 function Experience() {
-  const experiences = [
-    {
-      company: "ADP - Groupe ADP",
-      position: "Web Development Intern",
-      duration: "September 2024 - January 2025",
-      description: [
-        "Developed a monitoring web application for the Extime marketplace using Blazor (frontend) and ASP.NET Core (backend).",
-        "Enabled real-time visualization of order workflows to support operational teams in identifying and resolving issues efficiently.",
-        "Participated in an agile environment with daily stand-ups and iterative sprints.",
-        "Strengthened skills in C#, API development, Entity Framework, and data visualization with ApexCharts.",
-        "Contributed to ADP’s broader digital transformation by delivering a scalable and modular internal tool."
-      ],
-    },
-    {
-      company: "ADP - Groupe ADP",
-      position: "Data Analytics Intern",
-      duration: "May - July 2023",
-      description: [
-        "Worked within the Data pole of the Digital department in the Information Systems Department",
-        "Created an innovative marketing brochure for data visualization solutions",
-        "Optimized existing dashboards on Excel and Power BI according to customer needs",
-        "Developed Power BI applications with relevant KPIs using Azure services",
-        "Applied data analytics techniques to improve business intelligence solutions",
-      ],
-    },
-    {
-      company: "ADP - Groupe ADP",
-      position: "IT Department Discovery Intern",
-      duration: "June 2022",
-      description: [
-        "Internship in the Digital department of the Information Systems Department",
-        "Discovered entities and professions within the IT department",
-        "Explored technologies including Azure, SAP BO, and Power BI in the App & Data division",
-        "Created and presented a comprehensive application map",
-        "Introduced to Power BI for dashboard creation and business intelligence",
-      ],
-    },
-    {
-      company: "ADP - Paris-Orly Airport",
-      position: "Information Systems Observer",
-      duration: "2018",
-      description: [
-        "Observation internship at the Information Systems Directorate of Paris-Orly Airport",
-        "Gained insights into airport information systems infrastructure",
-        "Observed IT operations and systems management in a critical transportation hub",
-        "First exposure to enterprise-level information systems and their importance in aviation",
-      ],
-    },
-  ];
-
-  return (
-    <section id="experience" className="section">
-      <div className="container">
-        <SectionHeading number="04" label="Experience">Learning through the journey.</SectionHeading>
-        <div className="experience-timeline">
-          {experiences.map((exp, index) => (
-            <div key={index} className="experience-item">
-              <div className="experience-header">
-                <h3>{exp.position}</h3>
-                <span className="company">{exp.company}</span>
-                <span className="duration">{exp.duration}</span>
-              </div>
-              <ul className="experience-description">
-                {exp.description.map((item, itemIndex) => (
-                  <li key={itemIndex}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="experience" className="section"><div className="container">
+    <SectionHeading number="04" label="Experience">Learning through the journey.</SectionHeading>
+    <p className="section-intro">Choose a stop to explore the work, tools and responsibilities behind each experience.</p>
+    <Journey items={EXPERIENCE_STOPS} label="Professional journey" prefix="work" />
+  </div></section>;
 }
 
 function Education() {
-  return (
-    <section id="education" className="section">
-      <div className="container">
-        <SectionHeading number="05" label="Education">Foundations for what comes next.</SectionHeading>
-        <div className="education-content">
-          <div className="education-item">
-            <div className="education-header">
-              <h3>Master's in Computer Science - Artificial Intelligence</h3>
-              <span className="school">
-                UQAC - Université du Québec à Chicoutimi
-              </span>
-              <span className="duration">2025 - 2026 (Expected)</span>
-            </div>
-            <div className="education-details">
-              <p>
-                Specialization: Artificial Intelligence and Machine Learning
-              </p>
-              <p>
-                Double degree program in partnership with EPITA, focusing on
-                advanced AI techniques, deep learning, and intelligent systems
-                development
-              </p>
-            </div>
-          </div>
-          <div className="education-item">
-            <div className="education-header">
-              <h3>Master's in Computer Science - IMAGE Major</h3>
-              <span className="school">
-                EPITA - École Pour l'Informatique et les Techniques Avancées
-              </span>
-              <span className="duration">2021 - 2026 (Expected)</span>
-            </div>
-            <div className="education-details">
-              <p>Specialization: Image Processing and Computer Vision</p>
-              <p>
-                Major IMAGE focuses on digital image processing, computer
-                vision, pattern recognition, multimedia applications, and image
-                synthesis
-              </p>
-              <p>
-                Relevant Coursework: Image Synthesis, Image Processing, Machine
-                Learning, OpenGL Programming, Medical Imaging, Pattern
-                Recognition
-              </p>
-            </div>
-          </div>
-          <div className="education-item">
-            <div className="education-header">
-              <h3>General Baccalauréat with Honors</h3>
-              <span className="school">Lycée Corot, Savigny-sur-Orge</span>
-              <span className="duration">2019 - 2021</span>
-            </div>
-            <div className="education-details">
-              <p>
-                Specializations: Mathematics, Physics-Chemistry and English
-                Literature
-              </p>
-              <p>Option: Advanced Mathematics</p>
-              <p>
-                Strong foundation in advanced mathematics and sciences,
-                preparing for engineering studies
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="education" className="section"><div className="container">
+    <SectionHeading number="05" label="Education">Foundations for what comes next.</SectionHeading>
+    <p className="section-intro">From the fundamentals to computer vision and artificial intelligence.</p>
+    <Journey items={EDUCATION_STOPS} label="Education journey" prefix="study" />
+  </div></section>;
 }
 
 function Contact() {
@@ -612,6 +421,7 @@ function Contact() {
             <div className="contact-item">
               <h3>Email</h3>
               <p><a href="mailto:ewan.schwaller@epita.fr">ewan.schwaller@epita.fr</a></p>
+              <CopyEmail email="ewan.schwaller@epita.fr" />
             </div>
             <div className="contact-item">
               <h3>LinkedIn</h3>
