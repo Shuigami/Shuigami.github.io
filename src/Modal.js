@@ -15,9 +15,11 @@ export default function Modal({ title, onClose, children, className = "", onKeyD
     const dialog = dialogRef.current;
     const current = getComputedStyle(dialog);
     const from = { opacity: current.opacity, transform: current.transform };
+    if (dialog.animate) dialog.style.setProperty("--backdrop-exit-opacity", getComputedStyle(dialog, "::backdrop").opacity);
     opening.current?.cancel();
     dialog.classList.add("is-closing");
-    const exit = animateMotion(dialog, [from, { opacity: 0, transform: "translateY(18px) scale(0.97)" }], { duration: 190, easing: "ease-in" });
+    // Keep the final transparent frame until React removes the dialog.
+    const exit = animateMotion(dialog, [from, { opacity: 0, transform: "translateY(18px) scale(0.97)" }], { duration: 190, easing: "ease-in", fill: "both" });
     if (exit) exit.finished.then(() => latestOnClose.current(), () => latestOnClose.current());
     else latestOnClose.current();
   };

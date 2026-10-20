@@ -541,7 +541,7 @@ button.project-link { border: 0; background: transparent; font-family: inherit; 
 @keyframes check-draw { to { stroke-dashoffset: 0; } }
 @keyframes note-arrive { from { opacity: 0.3; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
 @keyframes backdrop-arrive { from { opacity: 0; } to { opacity: 1; } }
-@keyframes backdrop-leave { from { opacity: 1; } to { opacity: 0; } }
+@keyframes backdrop-leave { from { opacity: var(--backdrop-exit-opacity, 1); } to { opacity: 0; } }
 @media (max-width: 760px) {
   .hero h1 span { animation-duration: 850ms; }
   .journey-stops > button:hover { padding-left: 16px; }
