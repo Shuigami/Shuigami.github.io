@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import GitHubProjects from "./GitHubProjects";
+import usePortfolioEffects from "./usePortfolioEffects";
 
 ChartJS.register(
   RadialLinearScale,
@@ -26,8 +27,9 @@ function ArrowIcon({ className = "" }) {
 }
 
 function App() {
+  const appRef = usePortfolioEffects();
   return (
-    <div className="App">
+    <div className="App" ref={appRef}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Navigation />
       <main id="main">
@@ -53,15 +55,15 @@ function Navigation() {
     const onScroll = () => setIsScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    const observer = new IntersectionObserver((entries) => {
+    const observer = typeof IntersectionObserver === "undefined" ? null : new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) setActiveSection(entry.target.id);
       });
     }, { rootMargin: "-20% 0px -55% 0px" });
-    document.querySelectorAll("main section[id]").forEach((section) => observer.observe(section));
+    document.querySelectorAll("main section[id]").forEach((section) => observer?.observe(section));
     return () => {
       window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
+      observer?.disconnect();
     };
   }, []);
 
@@ -140,6 +142,12 @@ function Navigation() {
 function Hero() {
   return (
     <section id="home" className="hero" aria-labelledby="hero-title">
+      <div className="hero-landscape" aria-hidden="true" />
+      <div className="hero-haze" aria-hidden="true" />
+      <svg className="hero-dunes" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path className="dune-ridge" d="M-40 210C160 75 290 175 580 195S1080 90 1480 155V280H-40Z" />
+        <path className="dune-front" d="M-40 225C240 130 360 230 720 215S1130 145 1480 220V280H-40Z" />
+      </svg>
       <div className="hero-content">
         <div className="hero-text">
           <p className="hero-kicker">Software engineer · AI & computer vision</p>
