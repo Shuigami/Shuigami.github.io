@@ -150,8 +150,8 @@ export default function GitHubProjects() {
           </div>
         </div>
         <p className="github-result-count" role="status">Showing {Math.min(visibleCount, filteredRepositories.length)} of {filteredRepositories.length} {filteredRepositories.length === 1 ? "repository" : "repositories"}{search.trim() || language ? " matching your filters" : ""}.</p>
-        {filteredRepositories.length > 0 ? <ul className="github-repo-list" aria-label="Public GitHub repositories">
-          {filteredRepositories.slice(0, visibleCount).map((repository) => <li key={repository.id}>
+        {filteredRepositories.length > 0 ? <ul key={`${search}-${language}-${sort}`} className="github-repo-list" aria-label="Public GitHub repositories">
+          {filteredRepositories.slice(0, visibleCount).map((repository, index) => <li key={repository.id} style={{ "--row-index": Math.min(index, 5) }}>
             <a href={repository.html_url} target="_blank" rel="noopener noreferrer" className="github-repo-link">
               <span className="github-repo-info">
                 <span className="github-repo-name">{repository.name}</span>

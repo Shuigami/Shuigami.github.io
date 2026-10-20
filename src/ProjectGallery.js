@@ -24,10 +24,10 @@ function GalleryContent({ project, index, onChange, onExpand, fullscreen }) {
         const end = event.changedTouches[0];
         if (start && end && Math.abs(end.clientX - start.x) > 50 && Math.abs(end.clientX - start.x) > Math.abs(end.clientY - start.y) * 1.2) step(end.clientX < start.x ? 1 : -1);
       }}>
-      {slide.src ? <img src={slide.src} alt={`${project.title} — ${slide.title}`} /> : <GalleryPlaceholder slide={slide} />}
+      {slide.src ? <img key={index} className="gallery-slide" src={slide.src} alt={`${project.title} — ${slide.title}`} /> : <GalleryPlaceholder key={index} slide={slide} />}
       {onExpand && <button type="button" className="gallery-expand" onClick={onExpand} aria-label={`Open ${project.title} gallery fullscreen`}><ExpandIcon /> Fullscreen</button>}
     </div>
-    <div className="gallery-caption"><div aria-live="polite" aria-atomic="true"><span className="gallery-counter">{String(index + 1).padStart(2, "0")} / {String(project.gallery.length).padStart(2, "0")}</span><p>{slide.title}</p><span>{slide.caption}</span></div>
+    <div className="gallery-caption"><div aria-live="polite" aria-atomic="true"><div key={index} className="gallery-caption-content"><span className="gallery-counter">{String(index + 1).padStart(2, "0")} / {String(project.gallery.length).padStart(2, "0")}</span><p>{slide.title}</p><span>{slide.caption}</span></div></div>
       <div className="gallery-arrows"><button type="button" onClick={() => step(-1)} aria-label="Previous image">←</button><button type="button" onClick={() => step(1)} aria-label="Next image">→</button></div>
     </div>
     <div className="gallery-thumbnails" aria-label="Choose an image">

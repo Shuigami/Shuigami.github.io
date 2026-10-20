@@ -30,7 +30,7 @@ export default function FeaturedProjects({ selectedSkill, onSelectSkill }) {
       {[null, ...PROJECT_SKILLS].map((skill) => <button type="button" key={skill || "all"} aria-pressed={selectedSkill === skill} onClick={() => onSelectSkill(skill)}>{skill || "All projects"}</button>)}
     </div>
     <p className="featured-count" role="status">{visible.length} {visible.length === 1 ? "case study" : "case studies"}{selectedSkill ? ` using ${selectedSkill}` : " to explore"}.</p>
-    <div className="projects-grid">
+    <div className="projects-grid" key={selectedSkill || "all"}>
       {visible.map((project) => <article key={project.id} className="project-card">
         <button type="button" className="project-image project-cover" aria-label={`Explore ${project.title}`} onClick={() => setOpenedProject(project)}><img src={project.image} alt={`${project.title} project screenshot`} loading="lazy" /><span className="project-cover-action">Open field notes <ArrowIcon /></span></button>
         <div className="project-content"><span className="project-number">0{PROJECTS.indexOf(project) + 1} / {project.category}</span><h3><button type="button" className="project-title-button" onClick={() => setOpenedProject(project)}>{project.title}</button></h3><p>{project.summary}</p>

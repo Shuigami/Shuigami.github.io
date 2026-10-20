@@ -17,6 +17,7 @@ export default function usePortfolioEffects() {
     let frame = 0;
     let pointerX = 0;
     let pointerY = 0;
+    let pointerFocus = false;
     const targets = [...app.querySelectorAll(REVEAL_SELECTOR)];
 
     const reveal = (element) => {
@@ -38,6 +39,7 @@ export default function usePortfolioEffects() {
       frame = 0;
       if (preference.matches) return;
       const rect = hero.getBoundingClientRect();
+      app.dataset.heroVisible = String(rect.bottom > 0 && rect.top < window.innerHeight);
       const distance = clamp(-rect.top, 0, rect.height);
       const mobile = window.innerWidth <= 760;
       const depth = mobile ? 0.55 : 1;
@@ -97,9 +99,14 @@ export default function usePortfolioEffects() {
       requestUpdate();
     };
     const resetPointer = () => { pointerX = 0; pointerY = 0; requestUpdate(); };
+    const onPointerDown = () => { pointerFocus = true; };
+    const onKeyDown = () => { pointerFocus = false; };
     const onFocus = (event) => {
-      const target = event.target.closest?.(".reveal-pending");
-      if (target) reveal(target);
+      const target = event.target.closest?.(".reveal-target");
+      if (target && !pointerFocus) {
+        target.classList.add("reveal-instant");
+        reveal(target);
+      }
     };
     const onHashChange = () => { revealHashTarget(); requestUpdate(); };
     const resizeObserver = typeof ResizeObserver !== "undefined" ? new ResizeObserver(requestUpdate) : null;
@@ -114,6 +121,8 @@ export default function usePortfolioEffects() {
     hero.addEventListener("pointermove", onPointerMove, { passive: true });
     hero.addEventListener("pointerleave", resetPointer);
     app.addEventListener("focusin", onFocus);
+    document.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
+    document.addEventListener("keydown", onKeyDown, true);
 
     return () => {
       observer?.disconnect();
@@ -127,7 +136,9 @@ export default function usePortfolioEffects() {
       hero.removeEventListener("pointermove", onPointerMove);
       hero.removeEventListener("pointerleave", resetPointer);
       app.removeEventListener("focusin", onFocus);
-      targets.forEach((target) => target.classList.remove("reveal-pending", "reveal-target"));
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("keydown", onKeyDown, true);
+      targets.forEach((target) => target.classList.remove("reveal-pending", "reveal-target", "reveal-instant"));
     };
   }, []);
 

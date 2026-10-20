@@ -18,6 +18,7 @@ import { EXPERIENCE_STOPS, EDUCATION_STOPS } from "./journeyData";
 import ReadingProgress from "./ReadingProgress";
 import CopyEmail from "./CopyEmail";
 import usePortfolioEffects from "./usePortfolioEffects";
+import useInteractionMotion from "./useInteractionMotion";
 
 ChartJS.register(
   RadialLinearScale,
@@ -30,6 +31,7 @@ ChartJS.register(
 
 function App() {
   const appRef = usePortfolioEffects();
+  useInteractionMotion();
   const [selectedSkill, setSelectedSkill] = useState(null);
   return (
     <div className="App" ref={appRef}>
@@ -169,7 +171,7 @@ function Hero() {
 }
 
 function SectionHeading({ number, label, children }) {
-  return <div className="section-heading"><p className="section-eyebrow"><span>{number} /</span> {label}</p><h2 className="section-title">{children}</h2></div>;
+  return <div className="section-heading"><p className="section-eyebrow"><span>{number} /</span> {label}</p><h2 className="section-title">{String(children).split(" ").map((word, index) => <span key={`${word}-${index}`}><span className="title-word" style={{ "--word-index": Math.min(index, 6) }}>{word}</span>{" "}</span>)}</h2></div>;
 }
 
 function About() {
