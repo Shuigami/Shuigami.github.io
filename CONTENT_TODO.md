@@ -1,16 +1,17 @@
 # Portfolio content to complete
 
-The portfolio uses the three existing screenshots in `public/` and five additional
-Rasterizer scenes supplied by the author in `public/rasterizer/`: geometric
-primitives, a village, a solar system, a temple and a fountain garden. The Rasterizer
-gallery contains these five scenes plus the original well model. Raytracer and OCR
-still have explicit placeholders for additional captures. No renders, personal
+The portfolio uses the three existing screenshots in `public/`, five additional
+Rasterizer scenes in `public/rasterizer/` and two additional Raytracer scenes in
+`public/raytracer/`, all supplied by the author. Fountain garden is the Rasterizer
+cover and first slide; Four reflective spheres is the Raytracer cover and first
+slide. Both galleries retain their original render. Only OCR still has explicit
+placeholders for additional captures. No renders, personal
 contributions or performance figures have been invented. Update `src/projectData.js`
 when supplying the material below.
 
 | Project | Additional captures needed | Details needed |
 | --- | --- | --- |
-| Raytracer | A second scene with different materials/lighting; matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
+| Raytracer | Three scenes available; optional future comparison: matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
 | Sudoku OCR Solver | Grid detection/cell extraction; source image alongside recognized and solved grid | Your responsibilities within STEL, a challenge and its solution, recognition/solving results with test conditions |
 | Rasterizer | Six scenes available; optional future comparisons: wireframe vs. shaded views and flat/Phong/toon views of the same model | Your exact role, individual/team context, a challenge and its solution, any measured frame rate with scene/resolution/hardware |
 

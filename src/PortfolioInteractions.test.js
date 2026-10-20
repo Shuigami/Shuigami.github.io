@@ -32,16 +32,17 @@ test("opens a case study with documented features and clearly pending author con
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 });
 
-test("navigates real and pending gallery slides and closes fullscreen without closing the case study", () => {
+test("navigates supplied Raytracer scenes and closes fullscreen without closing the case study", () => {
   render(<App />);
   fireEvent.click(screen.getByRole("button", { name: "Explore Raytracer" }));
   const study = screen.getByRole("dialog", { name: "Raytracer — case study" });
+  expect(within(study).getByRole("img", { name: "Raytracer — Four reflective spheres" })).toHaveAttribute("src", "raytracer/four-reflective-spheres.png");
   fireEvent.click(within(study).getByRole("button", { name: "Next image" }));
-  expect(within(study).getByText("Preview pending")).toBeInTheDocument();
+  expect(within(study).getByRole("img", { name: "Raytracer — Spheres in perspective" })).toHaveAttribute("src", "raytracer/spheres-in-perspective.png");
   fireEvent.click(within(study).getByRole("button", { name: "Open Raytracer gallery fullscreen" }));
   const fullscreen = screen.getByRole("dialog", { name: "Raytracer gallery" });
   fireEvent.keyDown(fullscreen, { key: "ArrowRight" });
-  expect(within(fullscreen).getByRole("heading", { name: "Anti-aliasing comparison" })).toBeInTheDocument();
+  expect(within(fullscreen).getByRole("img", { name: "Raytracer — Low-light reflections" })).toHaveAttribute("src", "raytracer.png");
   fireEvent.click(within(fullscreen).getByRole("button", { name: "Close Raytracer gallery" }));
   expect(screen.queryByRole("dialog", { name: "Raytracer gallery" })).not.toBeInTheDocument();
   expect(screen.getByRole("dialog", { name: "Raytracer — case study" })).toBeInTheDocument();
