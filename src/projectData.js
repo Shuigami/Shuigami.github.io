@@ -39,11 +39,14 @@ export const PROJECTS = [
     github: "https://github.com/shuigami/rasterizer", image: "rasterizer.png",
     objective: "Render 3D meshes through a software rasterization pipeline and explore different shading and lighting techniques.",
     approach: ["Triangle rasterization with barycentric interpolation and Z-buffer depth testing.", "Flat, Phong and toon shading, plus shadow mapping.", "SDL2 window management, camera controls and wireframe rendering."],
-    outcome: "An interactive software renderer with switchable shading and wireframe modes. The gallery includes the existing well-model render.",
+    outcome: "An interactive software renderer with switchable shading and wireframe modes. The gallery showcases geometric primitives, a village, a solar system, a temple, a garden and the original well model.",
     gallery: [
-      { src: "rasterizer.png", title: "Rendered model", caption: "Existing well-model render from the portfolio." },
-      { title: "Wireframe → shaded", caption: "Rendering comparison to be provided.", needed: "The same model shown in wireframe and shaded modes." },
-      { title: "Shading study", caption: "Shading comparison to be provided.", needed: "Matching views using flat, Phong and toon shading." },
+      { src: "rasterizer/geometric-primitives.jpg", title: "Geometric primitives", caption: "Colored spheres, a cube and a cylinder arranged on a raised platform." },
+      { src: "rasterizer/low-poly-village.jpg", title: "Low-poly village", caption: "Four red-roofed houses, trees and intersecting paths." },
+      { src: "rasterizer/solar-system.jpg", title: "Solar system", caption: "A central star surrounded by colored planets, orbital paths and a ringed planet." },
+      { src: "rasterizer/columned-temple.jpg", title: "Columned temple", caption: "A stepped temple with columns, a red roof and a golden sphere at its center." },
+      { src: "rasterizer/fountain-garden.jpg", title: "Fountain garden", caption: "A two-tier fountain surrounded by trees, benches and garden paths." },
+      { src: "rasterizer.png", title: "Well model", caption: "The original well-model render from the portfolio." },
     ],
   },
 ];

@@ -345,7 +345,7 @@ button.project-link { border: 0; background: transparent; font-family: inherit; 
 .gallery-arrows { display: flex; flex-shrink: 0; gap: 8px; }
 .gallery-arrows button { width: 44px; height: 44px; border: 1px solid #b8874f66; color: #fff1d6; background: transparent; font-size: 22px; }
 .gallery-arrows button:hover { background: #a96b262b; }
-.gallery-thumbnails { display: flex; gap: 10px; padding: 0 20px 20px; }
+.gallery-thumbnails { display: flex; flex-wrap: wrap; gap: 10px; padding: 0 20px 20px; }
 .gallery-thumbnails > button { position: relative; width: 70px; aspect-ratio: 1; padding: 0; background: #271a12; border: 1px solid #b8874f66; color: #fff1d6; overflow: hidden; }
 .gallery-thumbnails > button[aria-pressed="true"] { outline: 1px solid #f2ae4d; outline-offset: 3px; }
 .gallery-thumbnails img { width: 100%; height: 100%; object-fit: cover; }

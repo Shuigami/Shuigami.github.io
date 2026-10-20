@@ -1,15 +1,18 @@
 # Portfolio content to complete
 
-The portfolio uses the three existing screenshots in `public/`. Additional gallery
-slides are explicit placeholders; no extra renders, personal contributions or
-performance figures have been invented. Update `src/projectData.js` when supplying
-the material below.
+The portfolio uses the three existing screenshots in `public/` and five additional
+Rasterizer scenes supplied by the author in `public/rasterizer/`: geometric
+primitives, a village, a solar system, a temple and a fountain garden. The Rasterizer
+gallery contains these five scenes plus the original well model. Raytracer and OCR
+still have explicit placeholders for additional captures. No renders, personal
+contributions or performance figures have been invented. Update `src/projectData.js`
+when supplying the material below.
 
 | Project | Additional captures needed | Details needed |
 | --- | --- | --- |
 | Raytracer | A second scene with different materials/lighting; matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
 | Sudoku OCR Solver | Grid detection/cell extraction; source image alongside recognized and solved grid | Your responsibilities within STEL, a challenge and its solution, recognition/solving results with test conditions |
-| Rasterizer | Wireframe vs. shaded views; flat/Phong/toon views of the same model | Your exact role, individual/team context, a challenge and its solution, any measured frame rate with scene/resolution/hardware |
+| Rasterizer | Six scenes available; optional future comparisons: wireframe vs. shaded views and flat/Phong/toon views of the same model | Your exact role, individual/team context, a challenge and its solution, any measured frame rate with scene/resolution/hardware |
 
 PNG, JPEG or WebP images are suitable. Supply the original captures rather than
 images of a screen. Results and comparison images should include enough context
