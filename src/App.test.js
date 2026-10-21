@@ -1,8 +1,6 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 
-// Charts are exercised in Chromium; jsdom does not implement Canvas.
-jest.mock('react-chartjs-2', () => ({ Radar: () => <div data-testid="radar-chart" /> }));
 jest.mock('./GitHubProjects', () => () => <div>GitHub project browser</div>);
 
 beforeAll(() => {
@@ -18,10 +16,12 @@ test('renders portfolio name', () => {
   expect(nameElement).toBeInTheDocument();
 });
 
-test('renders EPITA student text', () => {
+test('describes the current internship without claiming completed degrees', () => {
   render(<App />);
-  const studentText = screen.getByText('Software Engineering Student at EPITA');
-  expect(studentText).toBeInTheDocument();
+  const about = screen.getByRole('region', { name: 'Curiosity as a compass.' });
+  expect(about).toHaveTextContent('EPITA × UQAC · Double degree');
+  expect(about).toHaveTextContent("I'm completing my final-year internship to validate both");
+  expect(about).not.toHaveTextContent('20+');
 });
 
 test('renders navigation links', () => {
@@ -58,12 +58,17 @@ test('keeps project destinations and the CV available', () => {
   expect(screen.getByRole('link', { name: /Explore projects/ })).toHaveAttribute('href', '#projects');
 });
 
-test('provides labeled contact fields and readable skills alongside charts', () => {
+test('provides labeled contact fields and skills grounded in projects instead of proficiency scores', () => {
   render(<App />);
   fireEvent.change(screen.getByLabelText('Your name'), { target: { value: 'Alex' } });
   expect(screen.getByLabelText('Your name')).toHaveValue('Alex');
   expect(screen.getByLabelText('Your email')).toHaveAttribute('type', 'email');
   expect(screen.getByLabelText('Your message')).toBeRequired();
-  expect(screen.getAllByTestId('radar-chart')).toHaveLength(3);
-  expect(screen.getByText('OpenCV')).toBeInTheDocument();
+  const skills = screen.getByRole('region', { name: 'Built through projects and experience.' });
+  expect(within(skills).getAllByRole('article')).toHaveLength(6);
+  expect(skills).not.toHaveTextContent(/\d+%/);
+  expect(within(skills).getByText('OpenCV')).toBeInTheDocument();
+  expect(within(skills).getByRole('link', { name: /ProceduralLandscapes/ })).toHaveAttribute('href', 'https://github.com/Shuigami/ProceduralLandscapes');
+  expect(within(skills).getByRole('link', { name: /VideoFlow/ })).toHaveAttribute('target', '_blank');
+  expect(within(skills).getAllByRole('link', { name: 'Groupe ADP experience' })[0]).toHaveAttribute('href', '#experience');
 });

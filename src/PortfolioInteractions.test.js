@@ -4,7 +4,6 @@ import CopyEmail from "./CopyEmail";
 import Journey from "./Journey";
 import { EDUCATION_STOPS } from "./journeyData";
 
-jest.mock("react-chartjs-2", () => ({ Radar: () => <div data-testid="radar-chart" /> }));
 jest.mock("./GitHubProjects", () => () => <div>GitHub project browser</div>);
 
 beforeAll(() => {
@@ -59,7 +58,7 @@ test("selects journey stops with keyboard navigation and exposes the matching pa
   expect(screen.getByRole("tabpanel")).toHaveTextContent("Lycée Corot");
   fireEvent.keyDown(tabs[2], { key: "ArrowDown" });
   expect(tabs[0]).toHaveAttribute("aria-selected", "true");
-  expect(screen.getByRole("tabpanel")).toHaveTextContent("expected");
+  expect(screen.getByRole("tabpanel")).toHaveTextContent("Final-year internship in progress");
 });
 
 test("copies the public email address and announces success", async () => {

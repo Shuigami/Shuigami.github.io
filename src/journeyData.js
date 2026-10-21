@@ -68,19 +68,19 @@ export const EXPERIENCE_STOPS = experiences.map((experience, index) => ({
 
 export const EDUCATION_STOPS = [
   {
-    id: "uqac", marker: "2025–26", period: "2025–2026 (expected)",
+    id: "uqac", marker: "2025–26", period: "2025–2026 · Final-year internship in progress",
     title: "Master's in Computer Science — Artificial Intelligence",
     organization: "UQAC — Université du Québec à Chicoutimi",
     summary: "Double degree program in partnership with EPITA, focused on artificial intelligence and machine learning.",
-    details: ["Advanced AI techniques, deep learning and intelligent systems development."],
+    details: ["Advanced AI techniques, deep learning and intelligent systems development.", "Completing a final-year internship to validate this degree together with the EPITA engineering degree."],
     tags: ["Artificial Intelligence", "Machine Learning", "Double degree"],
   },
   {
-    id: "epita", marker: "2021–26", period: "2021–2026 (expected)",
-    title: "Master's in Computer Science — IMAGE Major",
+    id: "epita", marker: "2021–26", period: "2021–2026 · Final-year internship in progress",
+    title: "Engineering degree in Computer Science — IMAGE Major",
     organization: "EPITA — École Pour l'Informatique et les Techniques Avancées",
     summary: "Specialization in image processing and computer vision, covering image synthesis, pattern recognition and multimedia applications.",
-    details: ["Coursework: image synthesis, image processing, machine learning, OpenGL programming, medical imaging and pattern recognition."],
+    details: ["Coursework: image synthesis, image processing, machine learning, OpenGL programming, medical imaging and pattern recognition.", "Degree validation is pending completion of the final-year internship, alongside the UQAC double degree."],
     tags: ["Computer Vision", "Image Synthesis", "OpenGL"],
   },
   {

@@ -25,8 +25,13 @@ For the two main Groupe ADP internships, add concrete outcomes or measured impac
 if available. The existing missions and technologies remain visible in the
 interactive journey; its results notes are placeholders.
 
-Education dates remain marked **expected**, as in the original portfolio. Confirm
-current degree status before replacing those labels.
+The author confirmed that the final-year internship is in progress and validates
+both EPITA and UQAC degrees. The profile and education sections reflect that
+status. Add the current employer, topic and dates only when supplied.
+
+The profile and skills now draw on the existing CV and the full public GitHub
+repository review documented in `PROFILE_SOURCES.md`. Other CVs in Canvas remain
+unavailable in this environment and have not been used.
 
 ## Technical description sources
 

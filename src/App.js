@@ -1,17 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Radar } from "react-chartjs-2";
 import FeaturedProjects from "./FeaturedProjects";
 import { PROJECTS, PROJECT_SKILLS } from "./projectData";
+import { SKILL_AREAS, DEVELOPMENT_TOOLKIT } from "./profileData";
 import { ArrowIcon } from "./Icons";
 import Journey from "./Journey";
 import { EXPERIENCE_STOPS, EDUCATION_STOPS } from "./journeyData";
@@ -19,15 +10,6 @@ import ReadingProgress from "./ReadingProgress";
 import CopyEmail from "./CopyEmail";
 import usePortfolioEffects from "./usePortfolioEffects";
 import useInteractionMotion from "./useInteractionMotion";
-
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend
-);
 
 function App() {
   const appRef = usePortfolioEffects();
@@ -156,9 +138,9 @@ function Hero() {
       </svg>
       <div className="hero-content">
         <div className="hero-text">
-          <p className="hero-kicker">Software engineer · AI & computer vision</p>
+          <p className="hero-kicker">Final-year engineering intern · AI, vision & software</p>
           <h1 id="hero-title"><span>Ewan</span>{" "}<span>Schwaller</span></h1>
-          <p className="hero-description">Building intelligent systems.<br className="mobile-break" /> Exploring new horizons.</p>
+          <p className="hero-description">From images and models<br className="mobile-break" /> to working applications.</p>
           <div className="hero-buttons">
             <a className="btn-primary" href="#projects">Explore projects <ArrowIcon /></a>
             <a className="btn-secondary" href="cv.pdf" target="_blank" rel="noopener noreferrer">Download CV <span className="sr-only">(PDF, opens in a new tab)</span></a>
@@ -170,43 +152,49 @@ function Hero() {
   );
 }
 
-function SectionHeading({ number, label, children }) {
-  return <div className="section-heading"><p className="section-eyebrow"><span>{number} /</span> {label}</p><h2 className="section-title">{String(children).split(" ").map((word, index) => <span key={`${word}-${index}`}><span className="title-word" style={{ "--word-index": Math.min(index, 6) }}>{word}</span>{" "}</span>)}</h2></div>;
+function SectionHeading({ id, number, label, children }) {
+  return <div className="section-heading"><p className="section-eyebrow"><span>{number} /</span> {label}</p><h2 id={id} className="section-title">{String(children).split(" ").map((word, index) => <span key={`${word}-${index}`}><span className="title-word" style={{ "--word-index": Math.min(index, 6) }}>{word}</span>{" "}</span>)}</h2></div>;
 }
 
 function About() {
   return (
-    <section id="about" className="section">
+    <section id="about" className="section" aria-labelledby="about-title">
       <div className="container">
-        <SectionHeading number="01" label="About me">Curiosity as a compass.</SectionHeading>
+        <SectionHeading id="about-title" number="01" label="About me">Curiosity as a compass.</SectionHeading>
         <div className="about-content">
           <figure className="about-portrait">
             <img src="me.jpg" alt="Ewan Schwaller" loading="lazy" width="420" height="500" />
-            <figcaption>Software Engineering Student at EPITA<span>Image processing & artificial intelligence</span></figcaption>
+            <figcaption>EPITA × UQAC · Double degree<span>Final-year internship in progress</span></figcaption>
           </figure>
           <div className="about-text">
             <p>
-              5th-year software engineering student at EPITA, specializing in
-              image processing, computer vision and artificial intelligence.
-              I explore how code can turn pixels and geometry into something useful.
+              I'm completing my final-year internship to validate both my EPITA
+              engineering degree, in the IMAGE major, and my UQAC computer science
+              degree, focused on artificial intelligence.
             </p>
             <p>
-              My work spans rendering engines, image recognition and web applications.
-              I'm preparing a double degree with UQAC in Computer Science and AI,
-              building on hands-on projects and experience at Groupe ADP.
+              My projects connect AI, images and software: generative models for
+              music and handwritten digits, medical-image analysis, 3D reconstruction,
+              C++ rendering engines and applications for video processing and race strategy.
+            </p>
+            <p>
+              At Groupe ADP, I worked on full-stack monitoring tools with C#, Blazor
+              and ASP.NET Core, and on data dashboards with Power BI and Azure.
+              I have also helped introduce programming to schoolgirls through
+              Prologin's Girls Can Code! workshops.
             </p>
             <div className="about-highlights">
               <div className="highlight">
-                <span className="highlight-number">5</span>
-                <span className="highlight-text">Years at EPITA</span>
+                <span className="highlight-number">2</span>
+                <span className="highlight-text">Degrees being validated</span>
               </div>
               <div className="highlight">
-                <span className="highlight-number">20+</span>
-                <span className="highlight-text">Projects Completed</span>
+                <span className="highlight-number">{PROJECTS.length}</span>
+                <span className="highlight-text">Featured case studies</span>
               </div>
               <div className="highlight">
-                <span className="highlight-number">4</span>
-                <span className="highlight-text">Internships</span>
+                <span className="highlight-number">ADP</span>
+                <span className="highlight-text">Previous internships</span>
               </div>
             </div>
           </div>
@@ -217,125 +205,33 @@ function About() {
 }
 
 function Skills({ onSelectSkill }) {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      skills: [
-        { name: "C/C++", level: 90 },
-        { name: "Python", level: 85 },
-        { name: "C#", level: 85 },
-        { name: "Java", level: 80 },
-        { name: "JavaScript", level: 75 },
-        { name: "SQL", level: 70 },
-      ],
-      color: "rgba(235, 151, 55, 0.18)",
-      borderColor: "#eba137",
-    },
-    {
-      title: "AI & Computer Vision",
-      skills: [
-        { name: "OpenCV", level: 85 },
-        { name: "NumPy", level: 85 },
-        { name: "scikit-learn", level: 80 },
-        { name: "TensorFlow", level: 75 },
-        { name: "PyTorch", level: 70 },
-        { name: "Deep Learning", level: 70 },
-      ],
-      color: "rgba(213, 105, 65, 0.18)",
-      borderColor: "#e3946a",
-    },
-    {
-      title: "Development & Tools",
-      skills: [
-        { name: "Vim", level: 95 },
-        { name: "Unix/Linux", level: 90 },
-        { name: "Git", level: 85 },
-        { name: "Docker", level: 75 },
-        { name: "React.js", level: 70 },
-        { name: "Blender", level: 65 },
-      ],
-      color: "rgba(222, 197, 146, 0.18)",
-      borderColor: "#dec592",
-    },
-  ];
-
-  const chartOptions = {
-    scales: {
-      r: {
-        angleLines: {
-          color: "rgba(255, 255, 255, 0.1)",
-        },
-        grid: {
-          color: "rgba(255, 255, 255, 0.1)",
-        },
-        pointLabels: {
-          color: "#d9c9b7",
-          font: {
-            size: 11,
-            family: "Arial, sans-serif",
-            weight: "500",
-          },
-        },
-        ticks: {
-          display: false,
-          stepSize: 20,
-        },
-        suggestedMin: 0,
-        suggestedMax: 100,
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        backgroundColor: "rgba(38, 22, 15, 0.96)",
-        titleFont: { size: 14 },
-        bodyFont: { size: 14 },
-        displayColors: false,
-      },
-    },
-    maintainAspectRatio: false,
-    responsive: true,
-  };
-
   return (
-    <section id="skills" className="section">
+    <section id="skills" className="section" aria-labelledby="skills-title">
       <div className="container">
-        <SectionHeading number="02" label="Skills & expertise">A toolkit for new frontiers.</SectionHeading>
-        <div className="skills-explore"><p>Follow a skill into a project.</p><div>{PROJECT_SKILLS.map((skill) => <a key={skill} href="#projects" onClick={() => onSelectSkill(skill)}>{skill}<ArrowIcon /></a>)}</div></div>
+        <SectionHeading id="skills-title" number="02" label="Skills & practice">Built through projects and experience.</SectionHeading>
+        <p className="section-intro">From training models and rendering scenes to building APIs and processing media. Explore the projects and work behind each area.</p>
+        <div className="skills-explore"><p>Follow a skill into a case study.</p><div>{PROJECT_SKILLS.map((skill) => <a key={skill} href="#projects" onClick={() => onSelectSkill(skill)}>{skill}<ArrowIcon /></a>)}</div></div>
         <div className="skills-grid">
-          {skillCategories.map((category, index) => {
-            const data = {
-              labels: category.skills.map((s) => s.name),
-              datasets: [
-                {
-                  label: "Level",
-                  data: category.skills.map((s) => s.level),
-                  backgroundColor: category.color,
-                  borderColor: category.borderColor,
-                  borderWidth: 2,
-                  pointBackgroundColor: category.borderColor,
-                  pointBorderColor: "#fff",
-                  pointHoverBackgroundColor: "#fff",
-                  pointHoverBorderColor: category.borderColor,
-                },
-              ],
-            };
-
-            return (
-              <div key={index} className="skill-category">
-                <h3>{category.title}</h3>
-                <div className="skill-chart-container">
-                  <Radar data={data} options={chartOptions} role="img" aria-label={`${category.title} proficiency chart`} />
-                </div>
-                <ul className="skill-summary">
-                  {category.skills.map((skill) => <li key={skill.name}><span>{PROJECTS.some((project) => project.skills.includes(skill.name)) ? <a href="#projects" className="linked-skill" onClick={() => onSelectSkill(skill.name)} aria-label={`See projects using ${skill.name}`}>{skill.name}<ArrowIcon /></a> : skill.name}</span><span>{skill.level}%</span></li>)}
-                </ul>
-              </div>
-            );
-          })}
+          {SKILL_AREAS.map((area, index) => <article key={area.id} className="skill-category" aria-labelledby={`skill-${area.id}`}>
+            <span className="skill-area-number" aria-hidden="true">0{index + 1}</span>
+            <h3 id={`skill-${area.id}`}>{area.title}</h3>
+            <p className="skill-description">{area.description}</p>
+            <ul className="skill-technologies" aria-label={`${area.title} technologies`}>
+              {area.technologies.map((technology) => <li key={technology}>{PROJECTS.some((project) => project.skills.includes(technology))
+                ? <a href="#projects" className="linked-skill" onClick={() => onSelectSkill(technology)} aria-label={`See projects using ${technology}`}>{technology}<ArrowIcon /></a>
+                : technology}</li>)}
+            </ul>
+            <div className="skill-examples" aria-label={`${area.title} examples`}>
+              {area.examples.map((example) => {
+                const external = example.href.startsWith("https://");
+                return <a key={example.href} href={example.href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>
+                  {example.label}<ArrowIcon />{external && <span className="sr-only">(opens in a new tab)</span>}
+                </a>;
+              })}
+            </div>
+          </article>)}
         </div>
+        <div className="skills-toolkit"><h3>Development toolkit</h3><ul>{DEVELOPMENT_TOOLKIT.map((tool) => <li key={tool}>{tool}</li>)}</ul></div>
       </div>
     </section>
   );

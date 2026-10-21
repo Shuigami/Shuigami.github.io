@@ -19,7 +19,7 @@ Welcome to my personal portfolio website! This project represents my skills, pro
 - 🌊 **Smooth Scrolling** - Seamless navigation between sections
 - 🎯 **Interactive Elements** - Hover effects and dynamic content
 - 🚀 **Fast Performance** - Optimized build with React
-- 📊 **Skills Visualization** - Animated skill bars and progress indicators
+- 🛠️ **Skills in Practice** - Animated skill cards linked to public projects and professional experience
 - 💼 **Project Showcase** - Detailed project cards with live demos
 - 📝 **Experience Timeline** - Professional experience in chronological order
 - 📧 **Contact Form** - Easy way to get in touch
@@ -36,7 +36,7 @@ Welcome to my personal portfolio website! This project represents my skills, pro
 
 1. **🏠 Hero** - Welcome section with call-to-action
 2. **👨‍💻 About** - Personal introduction and highlights
-3. **⚡ Skills** - Technical skills with proficiency levels
+3. **⚡ Skills** - Six domains of practice, technologies and links to concrete examples
 4. **🚀 Projects** - Showcase of my best work
 5. **💼 Experience** - Professional and academic experience
 6. **🎓 Education** - Academic background
