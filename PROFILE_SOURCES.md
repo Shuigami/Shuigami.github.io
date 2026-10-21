@@ -51,8 +51,12 @@ The highlighted project count is the number of featured case studies, derived
 from `PROJECTS.length`; it is not a count of all projects completed.
 
 The featured selection contains FormaScale, RaceForesight, VideoFlow,
-VITK-Project, Raytracer, Sudoku OCR Solver and Rasterizer. The first four use
-explicit cover/gallery placeholders until the author supplies captures.
+VITK-Project, Raytracer, Sudoku OCR Solver and Rasterizer. FormaScale, RaceForesight
+and VideoFlow use explicit cover/gallery placeholders until the author supplies
+captures. VITK-Project uses four author-supplied figures: 3D segmentations,
+automatic segmentation, spatial change mapping and segmented-volume comparison.
+Their measurements concern example masks, without clinical validation; differences
+between masks are not presented as proof of clinical progression.
 NeuralComposer remains a skills reference but is excluded from featured case
 studies as requested. Existing Raytracer and Rasterizer cover priorities are
 preserved.

@@ -4,8 +4,9 @@ The portfolio uses the three existing screenshots in `public/`, five additional
 Rasterizer scenes in `public/rasterizer/` and two additional Raytracer scenes in
 `public/raytracer/`, all supplied by the author. Fountain garden is the Rasterizer
 cover and first slide; Four reflective spheres is the Raytracer cover and first
-slide. Both galleries retain their original render. OCR and the newly featured
-FormaScale, RaceForesight, VideoFlow and VITK-Project have explicit placeholders
+slide. Both galleries retain their original render. VITK-Project now includes four
+author-supplied figures in `public/vitk/`, with 3D segmentations as its cover and
+first slide. OCR, FormaScale, RaceForesight and VideoFlow have explicit placeholders
 for missing captures. No renders, personal
 contributions or performance figures have been invented. Update `src/projectData.js`
 when supplying the material below.
@@ -15,7 +16,7 @@ when supplying the material below.
 | FormaScale | Source photos beside the reconstructed cloud; live capture workspace; reconstruction diagnostics | Your exact role, capture/run context, one challenge and its solution; metric scale and measurement accuracy remain unvalidated |
 | RaceForesight | Strategy dashboard; driver strategy alternatives and degradation curve; model evaluation page | Your exact role, one challenge and its solution, dataset and evaluation conditions for any reported results |
 | VideoFlow | Processing dashboard; source video and generated outputs; implemented architecture diagram | Your responsibilities within the team, a challenge and its solution, local/AWS execution context |
-| VITK-Project | Shareable 3D medical visualization; registration and segmentation comparison; longitudinal changes | Your exact role, dataset context, a challenge and its solution, validated evaluation conditions |
+| VITK-Project | Four figures available: 3D segmentations, automatic segmentation, spatial change map and segmented volume comparison | Your exact role, dataset context, a challenge and its solution; the supplied figures describe algorithmic measurements on example data without clinical validation |
 | Raytracer | Three scenes available; optional future comparison: matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
 | Sudoku OCR Solver | Grid detection/cell extraction; source image alongside recognized and solved grid | Your responsibilities within STEL, a challenge and its solution, recognition/solving results with test conditions |
 | Rasterizer | Six scenes available; optional future comparisons: wireframe vs. shaded views and flat/Phong/toon views of the same model | Your exact role, individual/team context, a challenge and its solution, any measured frame rate with scene/resolution/hardware |

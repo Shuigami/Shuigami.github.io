@@ -24,7 +24,6 @@ test.each([
   ["FormaScale", "From photos to 3D", "Live capture workspace", "Reconstruction diagnostics"],
   ["RaceForesight", "Race strategy dashboard", "Tyres & pit windows", "Model evaluation"],
   ["VideoFlow", "Video processing dashboard", "Upload to processed outputs", "Event-driven pipeline"],
-  ["VITK-Project", "3D medical visualization", "Registration & segmentation", "Longitudinal changes"],
 ])("opens %s from an explicit placeholder and navigates its pending captures", (name, first, second, third) => {
   render(<App />);
   const cover = screen.getByRole("button", { name: `Explore ${name}`, exact: true });
@@ -43,6 +42,24 @@ test.each([
   expect(study).toBeInTheDocument();
   fireEvent.click(within(study).getByRole("button", { name: `Close ${name} — case study` }));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+});
+
+test("shows all four supplied VITK figures with their measurement context", () => {
+  render(<App />);
+  const cover = screen.getByRole("button", { name: "Explore VITK-Project", exact: true });
+  expect(within(cover).getByRole("img")).toHaveAttribute("src", "vitk/3d-segmentations.jpg");
+  fireEvent.click(cover);
+  const study = screen.getByRole("dialog", { name: "VITK-Project — case study" });
+  expect(within(study).queryByText("Preview pending")).not.toBeInTheDocument();
+  for (const title of ["3D segmentations", "Automatic segmentation", "Spatial change map", "Segmented volume comparison"]) {
+    expect(within(study).getByRole("img", { name: `VITK-Project — ${title}` })).toBeInTheDocument();
+    fireEvent.click(within(study).getByRole("button", { name: "Next image", exact: true }));
+  }
+  expect(within(study).getByText(/example-mask measurements, without clinical validation/)).toBeInTheDocument();
+  fireEvent.click(within(study).getByRole("button", { name: "Open VITK-Project gallery fullscreen" }));
+  const gallery = screen.getByRole("dialog", { name: "VITK-Project gallery", exact: true });
+  fireEvent.keyDown(gallery, { key: "ArrowLeft" });
+  expect(within(gallery).getByRole("img", { name: "VITK-Project — Segmented volume comparison" })).toBeInTheDocument();
 });
 
 test("filters the expanded selection and excludes NeuralComposer from featured case studies", () => {
