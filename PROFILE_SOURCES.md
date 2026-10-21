@@ -49,3 +49,10 @@ not establish the author's contribution.
 
 The highlighted project count is the number of featured case studies, derived
 from `PROJECTS.length`; it is not a count of all projects completed.
+
+The featured selection contains FormaScale, RaceForesight, VideoFlow,
+VITK-Project, Raytracer, Sudoku OCR Solver and Rasterizer. The first four use
+explicit cover/gallery placeholders until the author supplies captures.
+NeuralComposer remains a skills reference but is excluded from featured case
+studies as requested. Existing Raytracer and Rasterizer cover priorities are
+preserved.

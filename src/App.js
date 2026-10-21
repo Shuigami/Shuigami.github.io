@@ -242,7 +242,7 @@ function Projects({ selectedSkill, onSelectSkill }) {
     <section id="projects" className="section">
       <div className="container">
         <SectionHeading number="03" label="My projects">Projects I've built.</SectionHeading>
-        <p className="projects-intro">Selected work in computer graphics and computer vision. Open a case study to explore the ideas, techniques and visuals behind it.</p>
+        <p className="projects-intro">Selected work in computer vision, 3D reconstruction, machine learning, cloud applications and rendering. Open a case study to explore the ideas, techniques and visuals behind it.</p>
         <FeaturedProjects selectedSkill={selectedSkill} onSelectSkill={onSelectSkill} />
       </div>
     </section>

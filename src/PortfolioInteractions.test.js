@@ -20,6 +20,46 @@ test("links a skill to relevant case studies and resets the project filter", () 
   expect(screen.getByRole("button", { name: "Read Raytracer case study" })).toBeInTheDocument();
 });
 
+test.each([
+  ["FormaScale", "From photos to 3D", "Live capture workspace", "Reconstruction diagnostics"],
+  ["RaceForesight", "Race strategy dashboard", "Tyres & pit windows", "Model evaluation"],
+  ["VideoFlow", "Video processing dashboard", "Upload to processed outputs", "Event-driven pipeline"],
+  ["VITK-Project", "3D medical visualization", "Registration & segmentation", "Longitudinal changes"],
+])("opens %s from an explicit placeholder and navigates its pending captures", (name, first, second, third) => {
+  render(<App />);
+  const cover = screen.getByRole("button", { name: `Explore ${name}`, exact: true });
+  expect(within(cover).getByText("Preview pending")).toBeInTheDocument();
+  expect(within(cover).queryByRole("img")).not.toBeInTheDocument();
+  fireEvent.click(cover);
+  const study = screen.getByRole("dialog", { name: `${name} — case study` });
+  expect(within(study).getByRole("heading", { name: first })).toBeInTheDocument();
+  fireEvent.click(within(study).getByRole("button", { name: "Next image" }));
+  expect(within(study).getByRole("heading", { name: second })).toBeInTheDocument();
+  fireEvent.click(within(study).getByRole("button", { name: `Open ${name} gallery fullscreen` }));
+  const gallery = screen.getByRole("dialog", { name: `${name} gallery` });
+  fireEvent.keyDown(gallery, { key: "ArrowRight" });
+  expect(within(gallery).getByRole("heading", { name: third })).toBeInTheDocument();
+  fireEvent.click(within(gallery).getByRole("button", { name: `Close ${name} gallery`, exact: true }));
+  expect(study).toBeInTheDocument();
+  fireEvent.click(within(study).getByRole("button", { name: `Close ${name} — case study` }));
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+});
+
+test("filters the expanded selection and excludes NeuralComposer from featured case studies", () => {
+  render(<App />);
+  const filters = screen.getByRole("group", { name: "Filter featured projects" });
+  expect(screen.queryByRole("button", { name: "Explore NeuralComposer", exact: true })).not.toBeInTheDocument();
+  fireEvent.click(within(filters).getByRole("button", { name: "Machine Learning", exact: true }));
+  expect(screen.getByRole("button", { name: "Read RaceForesight case study" })).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "Read Raytracer case study" })).not.toBeInTheDocument();
+  fireEvent.click(within(filters).getByRole("button", { name: "Cloud", exact: true }));
+  expect(screen.getByRole("button", { name: "Read VideoFlow case study" })).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "Read RaceForesight case study" })).not.toBeInTheDocument();
+  fireEvent.click(within(filters).getByRole("button", { name: "All projects", exact: true }));
+  expect(screen.getByRole("button", { name: "Read FormaScale case study" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Read Rasterizer case study" })).toBeInTheDocument();
+});
+
 test("opens a case study with documented features and clearly pending author content", () => {
   render(<App />);
   fireEvent.click(screen.getByRole("button", { name: "Read Raytracer case study" }));

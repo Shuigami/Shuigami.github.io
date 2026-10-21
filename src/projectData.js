@@ -2,6 +2,66 @@
 // Personal contributions, retrospective challenges and metrics await the author.
 export const PROJECTS = [
   {
+    id: "formascale", title: "FormaScale", category: "Computer vision & 3D", context: "Experimental project",
+    summary: "Explore photo-based 3D reconstruction, from offline captures to a live phone-to-PC workflow.",
+    description: "A Python reconstruction workflow using COLMAP and pycolmap, with capture preparation, reconstruction diagnostics and an experimental live interface.",
+    technologies: ["Python", "COLMAP", "pycolmap", "OpenCV"], skills: ["Python", "Computer Vision", "3D Reconstruction"],
+    github: "https://github.com/Shuigami/FormaScale", image: null,
+    objective: "Reconstruct scenes from photographs and explore how capture, calibration and scale affect 3D measurements.",
+    approach: ["Prepare image captures and reconstruct sparse geometry with COLMAP / pycolmap.", "Compare reconstruction outputs with diagnostics and DTU evaluation tools.", "Explore phone-to-PC keyframe capture and optional dense reconstruction."],
+    outcome: "An experimental offline and live reconstruction workflow. Metric scale and measurement accuracy remain to be validated.",
+    gallery: [
+      { title: "From photos to 3D", caption: "Capture sequence and reconstruction preview coming soon.", needed: "Source photographs beside the reconstructed point cloud." },
+      { title: "Live capture workspace", caption: "Phone-to-PC workspace capture coming soon.", needed: "The camera stream and reconstruction displayed in the live workspace." },
+      { title: "Reconstruction diagnostics", caption: "Reconstruction diagnostics capture coming soon.", needed: "A reconstruction viewer or evaluation view, with the capture and run identified." },
+    ],
+  },
+  {
+    id: "raceforesight", title: "RaceForesight", category: "Machine learning & web", context: "Personal project",
+    summary: "Connect race data, lap-time predictions and tyre-strategy comparisons in a web application.",
+    description: "An F1 strategy project combining OpenF1 data, XGBoost models, a FastAPI backend and a Next.js interface.",
+    technologies: ["Python", "XGBoost", "FastAPI", "Next.js", "TypeScript"], skills: ["Python", "Machine Learning", "Web Development"],
+    github: "https://github.com/Shuigami/RaceForesight", image: null,
+    objective: "Use historical race data to estimate lap times and compare pit windows and tyre strategies.",
+    approach: ["Prepare historical lap, stint and pit data from OpenF1.", "Train predictive models and enumerate candidate one-stop and two-stop strategies.", "Expose strategy comparisons, degradation curves and model evaluation through an API and web interface."],
+    outcome: "A project connecting data preparation, predictive modelling, strategy simulation and a web interface, with tools for model evaluation and backtesting.",
+    gallery: [
+      { title: "Race strategy dashboard", caption: "Strategy dashboard capture coming soon.", needed: "The strategy grid with the selected race and its data context." },
+      { title: "Tyres & pit windows", caption: "Strategy comparison capture coming soon.", needed: "A driver's strategy alternatives and tyre-degradation curve." },
+      { title: "Model evaluation", caption: "Evaluation interface capture coming soon.", needed: "The model evaluation page, with dataset and evaluation conditions visible." },
+    ],
+  },
+  {
+    id: "videoflow", title: "VideoFlow", category: "Cloud & media", context: "Academic team project · 2 contributors",
+    summary: "Follow an uploaded video through an event-driven processing pipeline and live status updates.",
+    description: "A serverless video-processing project with a React interface, Python functions, FFmpeg and AWS infrastructure defined with SAM.",
+    technologies: ["React", "TypeScript", "Python", "AWS Lambda", "FFmpeg"], skills: ["Python", "Web Development", "Cloud"],
+    github: "https://github.com/Shuigami/VideoFlow", image: null,
+    objective: "Process uploaded videos through separate event-driven steps and make job progress and outputs accessible from a web interface.",
+    approach: ["Upload videos to S3 using presigned URLs and trigger processing through EventBridge.", "Use FFmpeg to generate video outputs, thumbnails and metadata.", "Track jobs with DynamoDB and WebSocket updates, with AWS SAM infrastructure and a local demonstration mode."],
+    outcome: "A video-processing project with a local FFmpeg demonstration and an AWS serverless implementation covering uploads, processing and job updates.",
+    gallery: [
+      { title: "Video processing dashboard", caption: "Processing dashboard capture coming soon.", needed: "The job list showing processing stages and status updates." },
+      { title: "Upload to processed outputs", caption: "Video outputs capture coming soon.", needed: "An uploaded video beside its transcoded outputs, thumbnail and metadata." },
+      { title: "Event-driven pipeline", caption: "Architecture overview coming soon.", needed: "An architecture diagram showing the implemented upload, processing and notification flow." },
+    ],
+  },
+  {
+    id: "vitk", title: "VITK-Project", category: "Medical imaging", context: "Medical-image analysis project",
+    summary: "Explore changes between two medical scans through registration, segmentation and 3D visualization.",
+    description: "A Python medical-image analysis pipeline using ITK for registration and segmentation, NumPy for analysis and VTK for interactive visualization.",
+    technologies: ["Python", "ITK", "VTK", "NumPy"], skills: ["Python", "Computer Vision", "Medical Imaging"],
+    github: "https://github.com/Shuigami/VITK-Project", image: null,
+    objective: "Align two scans, segment regions of interest and visualize their spatial and volumetric changes.",
+    approach: ["Register scans with ITK rigid transformations and mutual-information metrics.", "Segment regions using intensity thresholding, connected components and morphological processing.", "Analyze overlap and volume changes and display volumes and surfaces with VTK."],
+    outcome: "A longitudinal image-analysis workflow combining registration, segmentation, quantitative analysis and interactive 3D visualization.",
+    gallery: [
+      { title: "3D medical visualization", caption: "Interactive visualization capture coming soon.", needed: "A VTK view of the scans and segmented regions, using shareable data." },
+      { title: "Registration & segmentation", caption: "Processing comparison coming soon.", needed: "Before-and-after views of registration and segmentation for the same scans." },
+      { title: "Longitudinal changes", caption: "Change-analysis capture coming soon.", needed: "A change map or volume comparison with its data context." },
+    ],
+  },
+  {
     id: "raytracer", title: "Raytracer", category: "Computer graphics", context: "Academic project",
     summary: "From rays and geometry to light, materials and rendered scenes.",
     description: "A C++ raytracer with configurable geometric primitives, lights, materials and camera settings.",
@@ -51,4 +111,4 @@ export const PROJECTS = [
   },
 ];
 
-export const PROJECT_SKILLS = ["C/C++", "Computer Graphics", "Computer Vision", "SDL2", "CMake", "Neural Networks"];
+export const PROJECT_SKILLS = ["C/C++", "Python", "Computer Graphics", "Computer Vision", "Machine Learning", "3D Reconstruction", "Medical Imaging", "Web Development", "Cloud", "SDL2", "CMake", "Neural Networks"];

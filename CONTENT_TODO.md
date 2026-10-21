@@ -4,13 +4,18 @@ The portfolio uses the three existing screenshots in `public/`, five additional
 Rasterizer scenes in `public/rasterizer/` and two additional Raytracer scenes in
 `public/raytracer/`, all supplied by the author. Fountain garden is the Rasterizer
 cover and first slide; Four reflective spheres is the Raytracer cover and first
-slide. Both galleries retain their original render. Only OCR still has explicit
-placeholders for additional captures. No renders, personal
+slide. Both galleries retain their original render. OCR and the newly featured
+FormaScale, RaceForesight, VideoFlow and VITK-Project have explicit placeholders
+for missing captures. No renders, personal
 contributions or performance figures have been invented. Update `src/projectData.js`
 when supplying the material below.
 
 | Project | Additional captures needed | Details needed |
 | --- | --- | --- |
+| FormaScale | Source photos beside the reconstructed cloud; live capture workspace; reconstruction diagnostics | Your exact role, capture/run context, one challenge and its solution; metric scale and measurement accuracy remain unvalidated |
+| RaceForesight | Strategy dashboard; driver strategy alternatives and degradation curve; model evaluation page | Your exact role, one challenge and its solution, dataset and evaluation conditions for any reported results |
+| VideoFlow | Processing dashboard; source video and generated outputs; implemented architecture diagram | Your responsibilities within the team, a challenge and its solution, local/AWS execution context |
+| VITK-Project | Shareable 3D medical visualization; registration and segmentation comparison; longitudinal changes | Your exact role, dataset context, a challenge and its solution, validated evaluation conditions |
 | Raytracer | Three scenes available; optional future comparison: matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
 | Sudoku OCR Solver | Grid detection/cell extraction; source image alongside recognized and solved grid | Your responsibilities within STEL, a challenge and its solution, recognition/solving results with test conditions |
 | Rasterizer | Six scenes available; optional future comparisons: wireframe vs. shaded views and flat/Phong/toon views of the same model | Your exact role, individual/team context, a challenge and its solution, any measured frame rate with scene/resolution/hardware |
@@ -38,6 +43,10 @@ unavailable in this environment and have not been used.
 - [Raytracer README](https://github.com/Shuigami/raytracer#readme)
 - [OCR README](https://github.com/Shuigami/ocr#readme)
 - [Rasterizer README](https://github.com/Shuigami/rasterizer#readme)
+- [FormaScale README](https://github.com/Shuigami/FormaScale#readme)
+- [RaceForesight README](https://github.com/Shuigami/RaceForesight#readme)
+- [VideoFlow README](https://github.com/Shuigami/VideoFlow#readme)
+- [VITK-Project README](https://github.com/Shuigami/VITK-Project#readme)
 
 The OCR README documents **C**, SDL2, GTK and the four-person STEL team. The
 portfolio now reflects that instead of the previous C++ tag. Technical feature

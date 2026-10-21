@@ -5,6 +5,15 @@ import Modal from "./Modal";
 import ProjectGallery from "./ProjectGallery";
 import GitHubProjects from "./GitHubProjects";
 
+function ProjectCoverPlaceholder({ title }) {
+  return <span className="project-cover-placeholder">
+    <span className="placeholder-frame" aria-hidden="true"><span /></span>
+    <span className="pending-badge">Preview pending</span>
+    <span className="project-placeholder-title">{title}</span>
+    <span className="project-placeholder-caption">Project captures coming soon.</span>
+  </span>;
+}
+
 function ProjectDetails({ project, onClose }) {
   return <Modal title={`${project.title} — case study`} onClose={onClose}>
     <div className="case-study">
@@ -32,7 +41,7 @@ export default function FeaturedProjects({ selectedSkill, onSelectSkill }) {
     <p className="featured-count" role="status">{visible.length} {visible.length === 1 ? "case study" : "case studies"}{selectedSkill ? ` using ${selectedSkill}` : " to explore"}.</p>
     <div className="projects-grid" key={selectedSkill || "all"}>
       {visible.map((project) => <article key={project.id} className="project-card">
-        <button type="button" className="project-image project-cover" aria-label={`Explore ${project.title}`} onClick={() => setOpenedProject(project)}><img src={project.image} alt={`${project.title} project screenshot`} loading="lazy" /><span className="project-cover-action">Open field notes <ArrowIcon /></span></button>
+        <button type="button" className="project-image project-cover" aria-label={`Explore ${project.title}`} onClick={() => setOpenedProject(project)}>{project.image ? <img src={project.image} alt={`${project.title} project screenshot`} loading="lazy" /> : <ProjectCoverPlaceholder title={project.title} />}<span className="project-cover-action">Open field notes <ArrowIcon /></span></button>
         <div className="project-content"><span className="project-number">0{PROJECTS.indexOf(project) + 1} / {project.category}</span><h3><button type="button" className="project-title-button" onClick={() => setOpenedProject(project)}>{project.title}</button></h3><p>{project.summary}</p>
           <div className="project-tech">{project.technologies.map((technology) => <span className="tech-tag" key={technology}>{technology}</span>)}</div>
           <div className="project-links"><button type="button" className="project-link" aria-label={`Read ${project.title} case study`} onClick={() => setOpenedProject(project)}>Read case study <ArrowIcon /></button><a className="project-link project-source" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub (opens in a new tab)`}>GitHub <ArrowIcon /></a></div>
