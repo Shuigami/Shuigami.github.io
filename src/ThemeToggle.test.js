@@ -24,8 +24,10 @@ test("follows the system until the visitor chooses a palette, then persists the 
   render(<ThemeToggle />);
   const toggle = screen.getByRole("switch", { name: "Light theme" });
   expect(toggle).toHaveAttribute("aria-checked", "false");
+  expect(toggle).toHaveTextContent(/^Dark$/);
   act(() => { media.matches = true; changeSystem(); });
   expect(toggle).toHaveAttribute("aria-checked", "true");
+  expect(toggle).toHaveTextContent(/^Light$/);
   fireEvent.click(toggle);
   expect(toggle).toHaveAttribute("aria-checked", "false");
   expect(localStorage.getItem("portfolio-theme")).toBe("dark");
@@ -38,7 +40,8 @@ test("restores a saved choice even when the system prefers the other palette", (
   localStorage.setItem("portfolio-theme", "light");
   render(<ThemeToggle />);
   expect(screen.getByRole("switch", { name: "Light theme" })).toHaveAttribute("aria-checked", "true");
-  expect(screen.getByRole("status")).toHaveTextContent("The Fremen");
+  expect(screen.getByRole("status")).toHaveTextContent(/^Light theme$/);
+  expect(screen.getByRole("switch", { name: "Light theme" })).toHaveAttribute("title", "Switch to Dark theme");
 });
 
 test("adopts a preference changed in another tab", () => {

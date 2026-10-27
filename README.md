@@ -15,7 +15,7 @@ Welcome to my personal portfolio website! This project represents my skills, pro
 ## ✨ Features
 
 - 🎨 **Modern Design** - Clean, professional UI with smooth animations
-- 🌓 **Two Color Themes** - The Sandworm Encounter (dark) and The Fremen (light), with a persistent navigation toggle
+- 🌓 **Two Color Themes** - Dark with cool slate colors and Light with the site's original warm palette, using a persistent navigation toggle
 - 📱 **Fully Responsive** - Optimized for all devices and screen sizes
 - 🌊 **Smooth Scrolling** - Seamless navigation between sections
 - 🎯 **Interactive Elements** - Hover effects and dynamic content
@@ -31,8 +31,9 @@ The initial theme follows the browser preference. A visitor's choice is saved in
 `localStorage` (`portfolio-theme`), synchronized across tabs and applied before
 React starts through `public/theme-init.js`. Palette tokens live on the document
 root in `src/App.css`, so native dialogs and fullscreen galleries share the same
-colors. Light surfaces use pale tints of the supplied Fremen palette for readable
-text. Photos retain their original colors.
+colors. The Light theme restores the original warm brown, cream and gold palette;
+Dark keeps the cool slate palette. Both the navigation label and theme status use
+only Light / Dark. Photos retain their original colors.
 
 - **Frontend:** React 19.1.0 ⚛️
 - **Styling:** CSS3 with modern features 🎨

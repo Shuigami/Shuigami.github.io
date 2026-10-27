@@ -12,7 +12,7 @@ export default function ThemeToggle() {
   const [preference, setPreference] = useState(savedTheme);
   const [systemTheme, setSystemTheme] = useState(() => window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark");
   const theme = preference || systemTheme;
-  const name = theme === "light" ? "The Fremen" : "The Sandworm Encounter";
+  const label = theme === "light" ? "Light" : "Dark";
 
   useEffect(() => {
     const media = window.matchMedia?.("(prefers-color-scheme: light)");
@@ -30,7 +30,7 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#dbc2ab" : "#192325");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#23130d" : "#192325");
   }, [theme]);
 
   const toggle = () => {
@@ -42,14 +42,13 @@ export default function ThemeToggle() {
 
   return <>
     <button type="button" className="theme-toggle" role="switch" aria-label="Light theme" aria-checked={theme === "light"}
-      title={`${name} · Switch to ${theme === "light" ? "dark" : "light"} theme`} onClick={toggle}>
+      title={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`} onClick={toggle}>
       <span className="theme-symbol" aria-hidden="true">
         {theme === "light" ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></svg>
           : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.5 14.5A9 9 0 0 1 9.5 3.5a9 9 0 1 0 11 11Z" /></svg>}
       </span>
-      <span className="theme-label-name" aria-hidden="true">{theme === "light" ? "Fremen" : "Sandworm"}</span>
-      <span className="theme-label-short" aria-hidden="true">{theme === "light" ? "Light" : "Dark"}</span>
+      <span aria-hidden="true">{label}</span>
     </button>
-    <span className="sr-only" role="status" aria-live="polite">{name} · {theme} theme</span>
+    <span className="sr-only" role="status" aria-live="polite">{label} theme</span>
   </>;
 }
