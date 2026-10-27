@@ -118,12 +118,13 @@ img { display: block; max-width: 100%; }
 .hero-footer .arrow-icon { width: 12px; height: 12px; margin-left: 12px; }
 .section { padding: 88px 0; border-top: 1px solid var(--line); position: relative; isolation: isolate; }
 /* Reveal only enhanced, off-screen elements; content stays visible by default. */
-.reveal-target { transition: opacity 700ms ease, translate 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal-target { transition: opacity var(--reveal-duration, 700ms) ease, translate var(--reveal-duration, 700ms) cubic-bezier(0.22, 1, 0.36, 1); }
 .reveal-pending { opacity: 0; translate: 0 24px; }
-.reveal-instant, .section:target .reveal-target { opacity: 1; translate: 0 0; transition: none; }
-.project-card.reveal-target { transition: opacity 700ms ease, translate 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms, border-color 220ms; }
+.reveal-instant, .section:target .reveal-target { opacity: 1; translate: 0 0; --reveal-duration: 0ms; }
+.project-card.reveal-target { transition: opacity var(--reveal-duration, 700ms) ease, translate var(--reveal-duration, 700ms) cubic-bezier(0.22, 1, 0.36, 1), transform 220ms, border-color 220ms, box-shadow 220ms; }
 .skills-grid > :nth-child(2).reveal-target, .projects-grid > :nth-child(2).reveal-target { transition-delay: 70ms; }
 .skills-grid > :nth-child(3).reveal-target, .projects-grid > :nth-child(3).reveal-target { transition-delay: 140ms; }
+:is(.skills-grid, .projects-grid) > .reveal-target.reveal-instant, .section:target .reveal-target { transition-delay: 0ms; }
 /* Static points of light emerge with the dusk palette, never over the text. */
 #experience::before, #education::before, #contact::before, .footer::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -515,7 +516,7 @@ button.project-link { border: 0; background: transparent; font-family: inherit; 
 .project-card:nth-child(2) { animation-delay: 65ms; }
 .project-card:nth-child(3) { animation-delay: 130ms; }
 .project-card.reveal-instant { animation: none !important; }
-.reveal-target.reveal-instant { opacity: 1; translate: none; transition: none !important; }
+.reveal-target.reveal-instant { opacity: 1; translate: none; --reveal-duration: 0ms; }
 .reveal-instant .title-word, .reveal-instant .highlight { animation: none !important; }
 .project-image img { transform: translateY(var(--image-shift, 0px)) scale(1.08); }
 .project-card:hover .project-image img { transform: translateY(var(--image-shift, 0px)) scale(1.14); }

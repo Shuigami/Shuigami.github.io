@@ -17,6 +17,9 @@ export default function usePortfolioEffects() {
     let frame = 0;
     let pointerX = 0;
     let pointerY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let lastPointerFrame = 0;
     let pointerFocus = false;
     const targets = [...app.querySelectorAll(REVEAL_SELECTOR)];
 
@@ -35,13 +38,22 @@ export default function usePortfolioEffects() {
       section.querySelectorAll(".reveal-pending").forEach(reveal);
     };
 
-    const update = () => {
+    const update = (timestamp) => {
       frame = 0;
       if (preference.matches) return;
+      // Ease only the mouse offset: scroll depth stays directly tied to scrolling.
+      const elapsed = lastPointerFrame ? clamp(timestamp - lastPointerFrame, 0, 50) : 1000 / 60;
+      const easing = 1 - Math.exp(-elapsed / 110);
+      lastPointerFrame = timestamp;
+      pointerX += (targetX - pointerX) * easing;
+      pointerY += (targetY - pointerY) * easing;
+      if (Math.abs(targetX - pointerX) < 0.001) pointerX = targetX;
+      if (Math.abs(targetY - pointerY) < 0.001) pointerY = targetY;
       const rect = hero.getBoundingClientRect();
       app.dataset.heroVisible = String(rect.bottom > 0 && rect.top < window.innerHeight);
       const distance = clamp(-rect.top, 0, rect.height);
       const mobile = window.innerWidth <= 760;
+      if (mobile) pointerX = pointerY = targetX = targetY = 0;
       const depth = mobile ? 0.55 : 1;
       const lookX = mobile ? 0 : pointerX;
       const lookY = mobile ? 0 : pointerY;
@@ -55,6 +67,8 @@ export default function usePortfolioEffects() {
       const dusk = progress * progress * (3 - 2 * progress);
       app.style.setProperty("--twilight", dusk.toFixed(3));
       app.style.setProperty("--night-percent", `${(dusk * 100).toFixed(1)}%`);
+      if (pointerX !== targetX || pointerY !== targetY) frame = window.requestAnimationFrame(update);
+      else lastPointerFrame = 0;
     };
 
     const requestUpdate = () => {
@@ -67,6 +81,9 @@ export default function usePortfolioEffects() {
       frame = 0;
       pointerX = 0;
       pointerY = 0;
+      targetX = 0;
+      targetY = 0;
+      lastPointerFrame = 0;
       targets.forEach((target) => target.classList.remove("reveal-pending"));
       app.dataset.motion = preference.matches ? "off" : "on";
       if (preference.matches) {
@@ -94,11 +111,11 @@ export default function usePortfolioEffects() {
     const onPointerMove = (event) => {
       if (preference.matches || event.pointerType !== "mouse" || window.innerWidth <= 760) return;
       const rect = hero.getBoundingClientRect();
-      pointerX = clamp((event.clientX - rect.left) / rect.width * 2 - 1, -1, 1);
-      pointerY = clamp((event.clientY - rect.top) / rect.height * 2 - 1, -1, 1);
+      targetX = clamp((event.clientX - rect.left) / rect.width * 2 - 1, -1, 1);
+      targetY = clamp((event.clientY - rect.top) / rect.height * 2 - 1, -1, 1);
       requestUpdate();
     };
-    const resetPointer = () => { pointerX = 0; pointerY = 0; requestUpdate(); };
+    const resetPointer = () => { targetX = 0; targetY = 0; requestUpdate(); };
     const onPointerDown = () => { pointerFocus = true; };
     const onKeyDown = () => { pointerFocus = false; };
     const onFocus = (event) => {
@@ -120,6 +137,8 @@ export default function usePortfolioEffects() {
     window.addEventListener("pageshow", requestUpdate);
     hero.addEventListener("pointermove", onPointerMove, { passive: true });
     hero.addEventListener("pointerleave", resetPointer);
+    hero.addEventListener("pointercancel", resetPointer);
+    window.addEventListener("blur", resetPointer);
     app.addEventListener("focusin", onFocus);
     document.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
     document.addEventListener("keydown", onKeyDown, true);
@@ -135,6 +154,8 @@ export default function usePortfolioEffects() {
       window.removeEventListener("pageshow", requestUpdate);
       hero.removeEventListener("pointermove", onPointerMove);
       hero.removeEventListener("pointerleave", resetPointer);
+      hero.removeEventListener("pointercancel", resetPointer);
+      window.removeEventListener("blur", resetPointer);
       app.removeEventListener("focusin", onFocus);
       document.removeEventListener("pointerdown", onPointerDown, true);
       document.removeEventListener("keydown", onKeyDown, true);
