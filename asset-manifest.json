@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.6d654ae7.css",
-    "main.js": "/static/js/main.c3b6eb23.js",
+    "main.css": "/static/css/main.1a58905b.css",
+    "main.js": "/static/js/main.793299db.js",
     "static/js/206.f3a69c20.chunk.js": "/static/js/206.f3a69c20.chunk.js",
     "static/media/desert-panorama.webp": "/static/media/desert-panorama.a1310490f1b74a0f97b5.webp",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.6d654ae7.css",
-    "static/js/main.c3b6eb23.js"
+    "static/css/main.1a58905b.css",
+    "static/js/main.793299db.js"
   ]
 }

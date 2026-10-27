@@ -7,5 +7,5 @@
   }
   document.documentElement.dataset.theme = theme;
   var meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", theme === "light" ? "#dbc2ab" : "#192325");
+  if (meta) meta.setAttribute("content", theme === "light" ? "#23130d" : "#192325");
 }());
