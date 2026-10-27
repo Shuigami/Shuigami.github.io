@@ -10,6 +10,7 @@ import ReadingProgress from "./ReadingProgress";
 import CopyEmail from "./CopyEmail";
 import usePortfolioEffects from "./usePortfolioEffects";
 import useInteractionMotion from "./useInteractionMotion";
+import ThemeToggle from "./ThemeToggle";
 
 function App() {
   const appRef = usePortfolioEffects();
@@ -95,16 +96,19 @@ function Navigation() {
           ))}
         </div>
 
-        <button
-          id="menu-toggle"
-          className="nav-mobile-toggle"
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? "Close −" : "Menu +"}
-        </button>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <button
+            id="menu-toggle"
+            className="nav-mobile-toggle"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? "Close −" : "Menu +"}
+          </button>
+        </div>
 
         {isMobileMenuOpen && <div id="mobile-navigation" className="nav-mobile-menu" role="group" aria-label="Mobile navigation">
           {navItems.map((item) => (
