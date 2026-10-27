@@ -94,6 +94,7 @@ img { display: block; max-width: 100%; }
 /* The artwork is separate from the real, selectable HTML over it. */
 .hero { min-height: 620px; height: min(700px, 78svh); position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; background: var(--bg); }
 .hero-landscape { position: absolute; inset: -3%; z-index: -4; background: url("./assets/desert-panorama.webp") center 56% / cover no-repeat; transform: translate3d(var(--landscape-x, 0px), var(--landscape-y, 0px), 0); will-change: transform; }
+:root[data-theme="dark"] .hero-landscape { left: auto; width: min(72%, 1100px); background-image: url("./assets/desert-dark.jpg"); background-position: center 65%; mask-image: linear-gradient(90deg, transparent, black 22%); }
 .hero-haze { position: absolute; inset: 0; z-index: -3; pointer-events: none; background: radial-gradient(ellipse at 75% 45%, var(--tint), transparent 65%); transform: translate3d(0, var(--dune-y, 0px), 0); }
 .hero-dunes { position: absolute; left: -3%; bottom: -2px; width: 106%; height: 27%; z-index: -2; pointer-events: none; transform: translate3d(var(--dune-x, 0px), var(--dune-y, 0px), 0); }
 .dune-ridge { fill: var(--palette-2); opacity: 0.36; }
@@ -271,6 +272,7 @@ img { display: block; max-width: 100%; }
   .nav-mobile-menu .nav-link::after { right: auto; width: 35px; }
   .hero { min-height: 730px; height: 94svh; max-height: 850px; align-items: flex-start; }
   .hero-landscape { background-position: 65% center; }
+  :root[data-theme="dark"] .hero-landscape { left: -3%; width: auto; background-position: center 65%; mask-image: none; }
   .hero::before { background: linear-gradient(180deg, var(--hero-scrim), var(--hero-mid) 48%, transparent 67%, var(--bg)); }
   :root[data-theme="light"] .hero::before { background: linear-gradient(180deg, #65270666, #63280929 48%, transparent 67%, #1d100c80); }
   .hero-content { padding-top: 151px; padding-bottom: 0; }
