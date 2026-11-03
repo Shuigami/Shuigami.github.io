@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.4fe3fe9e.css",
-    "main.js": "/static/js/main.a4f68681.js",
+    "main.css": "/static/css/main.c79180ae.css",
+    "main.js": "/static/js/main.e1387623.js",
     "static/js/206.f3a69c20.chunk.js": "/static/js/206.f3a69c20.chunk.js",
     "static/media/desert-panorama.webp": "/static/media/desert-panorama.a1310490f1b74a0f97b5.webp",
     "static/media/desert-dark.jpg": "/static/media/desert-dark.69b422afc2b9c19888ce.jpg",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.4fe3fe9e.css",
-    "static/js/main.a4f68681.js"
+    "static/css/main.c79180ae.css",
+    "static/js/main.e1387623.js"
   ]
 }
