@@ -57,6 +57,7 @@ const experienceTags = [
 
 export const EXPERIENCE_STOPS = experiences.map((experience, index) => ({
   id: `experience-${index}`,
+  kind: "Work",
   title: experience.position,
   organization: experience.company,
   period: experience.duration,
@@ -68,7 +69,7 @@ export const EXPERIENCE_STOPS = experiences.map((experience, index) => ({
 
 export const EDUCATION_STOPS = [
   {
-    id: "uqac", marker: "2025–26", period: "2025–2026 · Final-year internship in progress",
+    id: "uqac", kind: "Study", marker: "2025–26", period: "2025–2026 · Final-year internship in progress",
     title: "Master's in Computer Science — Artificial Intelligence",
     organization: "UQAC — Université du Québec à Chicoutimi",
     summary: "Double degree program in partnership with EPITA, focused on artificial intelligence and machine learning.",
@@ -76,7 +77,7 @@ export const EDUCATION_STOPS = [
     tags: ["Artificial Intelligence", "Machine Learning", "Double degree"],
   },
   {
-    id: "epita", marker: "2021–26", period: "2021–2026 · Final-year internship in progress",
+    id: "epita", kind: "Study", marker: "2021–26", period: "2021–2026 · Final-year internship in progress",
     title: "Engineering degree in Computer Science — IMAGE Major",
     organization: "EPITA — École Pour l'Informatique et les Techniques Avancées",
     summary: "Specialization in image processing and computer vision, covering image synthesis, pattern recognition and multimedia applications.",
@@ -84,7 +85,7 @@ export const EDUCATION_STOPS = [
     tags: ["Computer Vision", "Image Synthesis", "OpenGL"],
   },
   {
-    id: "corot", marker: "2019–21", period: "2019–2021",
+    id: "corot", kind: "Study", marker: "2019–21", period: "2019–2021",
     title: "General Baccalauréat with Honors",
     organization: "Lycée Corot, Savigny-sur-Orge",
     summary: "Specializations in mathematics, physics-chemistry and English literature.",
@@ -92,3 +93,25 @@ export const EDUCATION_STOPS = [
     tags: ["Mathematics", "Physics-Chemistry", "English Literature"],
   },
 ];
+
+// Experience and education merged into one horizontal route, oldest first,
+// ending on an open "next" stop.
+const startYear = (stop) => parseInt(stop.marker, 10);
+
+export const ROUTE_STOPS = [
+  ...[...EXPERIENCE_STOPS, ...EDUCATION_STOPS].sort((a, b) => startYear(a) - startYear(b)),
+  {
+    id: "next", kind: "Open", marker: "Next", period: "Upcoming",
+    title: "Your team?",
+    organization: "After the final-year internship",
+    summary: "I'm completing my final-year internship to validate both degrees. Let's talk about what comes next.",
+    details: [],
+    tags: ["Contact"],
+  },
+];
+
+// Open on the most recent study stop.
+export const DEFAULT_ROUTE_STOP = ROUTE_STOPS.reduce(
+  (latest, stop, index) => (stop.kind === "Study" && (latest < 0 || startYear(stop) >= startYear(ROUTE_STOPS[latest])) ? index : latest),
+  -1,
+);
