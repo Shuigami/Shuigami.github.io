@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c79180ae.css",
-    "main.js": "/static/js/main.e1387623.js",
+    "main.js": "/static/js/main.6f532f9b.js",
     "static/js/206.f3a69c20.chunk.js": "/static/js/206.f3a69c20.chunk.js",
     "static/media/desert-panorama.webp": "/static/media/desert-panorama.a1310490f1b74a0f97b5.webp",
     "static/media/desert-dark.jpg": "/static/media/desert-dark.69b422afc2b9c19888ce.jpg",
@@ -9,6 +9,6 @@
   },
   "entrypoints": [
     "static/css/main.c79180ae.css",
-    "static/js/main.e1387623.js"
+    "static/js/main.6f532f9b.js"
   ]
 }
