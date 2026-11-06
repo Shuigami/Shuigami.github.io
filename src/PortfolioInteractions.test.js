@@ -69,10 +69,11 @@ test("opens one inline case study at a time and closes it again", () => {
 test("covers show real captures, a contained VITK figure or an explicit placeholder", () => {
   render(<App />);
   const cover = (name) => screen.getByRole("button", { name: `Read case study — ${name} cover` });
-  for (const name of ["FormaScale", "RaceForesight", "VideoFlow"]) {
+  for (const name of ["FormaScale", "VideoFlow"]) {
     expect(within(cover(name)).getByText("Preview pending")).toBeInTheDocument();
     expect(within(cover(name)).queryByRole("img")).not.toBeInTheDocument();
   }
+  expect(within(cover("RaceForesight")).getByRole("img")).toHaveAttribute("src", "raceforesight/predicted-standings.jpg");
   expect(within(cover("VITK-Project")).getByRole("img")).toHaveAttribute("src", "vitk/3d-segmentations.jpg");
   expect(cover("VITK-Project")).toHaveClass("is-contained");
   expect(within(cover("Raytracer")).getByRole("img", { name: "Raytracer project screenshot" })).toHaveAttribute("src", "raytracer/four-reflective-spheres.png");

@@ -6,7 +6,9 @@ Rasterizer scenes in `public/rasterizer/` and two additional Raytracer scenes in
 cover and first slide; Four reflective spheres is the Raytracer cover and first
 slide. Both galleries retain their original render. VITK-Project now includes four
 author-supplied figures in `public/vitk/`, with 3D segmentations as its cover and
-first slide. OCR, FormaScale, RaceForesight and VideoFlow have explicit placeholders
+first slide. RaceForesight now includes four author-supplied captures in
+`public/raceforesight/`, with the predicted standings as its cover and first
+slide. OCR, FormaScale and VideoFlow have explicit placeholders
 for missing captures. No renders, personal
 contributions or performance figures have been invented. Update `src/projectData.js`
 when supplying the material below.
@@ -14,7 +16,7 @@ when supplying the material below.
 | Project | Additional captures needed | Details needed |
 | --- | --- | --- |
 | FormaScale | Source photos beside the reconstructed cloud; live capture workspace; reconstruction diagnostics | Your exact role, capture/run context, one challenge and its solution; metric scale and measurement accuracy remain unvalidated |
-| RaceForesight | Strategy dashboard; driver strategy alternatives and degradation curve; model evaluation page | Your exact role, one challenge and its solution, dataset and evaluation conditions for any reported results |
+| RaceForesight | Four captures available: predicted standings, tyre strategies, forecast scored against the race and model evaluation; optional future capture: a tyre-degradation curve | Your exact role, one challenge and its solution, dataset and evaluation conditions for any reported results |
 | VideoFlow | Processing dashboard; source video and generated outputs; implemented architecture diagram | Your responsibilities within the team, a challenge and its solution, local/AWS execution context |
 | VITK-Project | Four figures available: 3D segmentations, automatic segmentation, spatial change map and segmented volume comparison | Your exact role, dataset context, a challenge and its solution; the supplied figures describe algorithmic measurements on example data without clinical validation |
 | Raytracer | Three scenes available; optional future comparison: matching renders with and without anti-aliasing | Your exact role, individual/team context, one challenge and its solution, any measured rendering time with scene/resolution/hardware |
